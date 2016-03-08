@@ -17,7 +17,7 @@ html
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='home') Gene Search
+          a.navbar-brand(href='#') Gene Search
         // Collect the nav links, forms, and other content for toggling
         #bs-example-navbar-collapse-1.collapse.navbar-collapse
           ul.nav.navbar-nav
@@ -26,7 +26,7 @@ html
                 | About
                 span.sr-only (current)
             li
-              a(href='home') correct
+              a(href='#') Link
             li.dropdown
               a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
                 | Dropdown 
@@ -70,33 +70,5 @@ html
     .jumbotron
       .container
         h1 Welcome to the Purugganan Oryza Data Center
-    #main.container
-      h4 You can either search by gene, or search by a variety of gene designations
-      .col-lg-6
-        .input-group
-          form(action='/home', method='POST', name='geneQuery')
-            input#genesearch.form-control(type='text', placeholder='Search for...', name='genesearch')
-            span.input-group-btn
-              button#buttonsearch.btn.btn-default(type='button') Search!
-        // /input-group
-      // .col-lg-6
-    // .container
   .container
-    .row
-      .darkBG.col-sm-6.col-xs-12
-        button(onclick="genesearch()") Gene Search
-      .darkBG.col-sm-6.col-xs-12
-        button(onclick="catsearch()") Category Search
-  script.
-    function genesearch() {
-      window.location.href = '/genesearch'
-    }
-
-    function catsearch() {
-      window.location.href = '/categorysearch'
-    }
-
-    function gohome() {
-      window.location.href = '/'
-    }
-    script(src='main.js')
+    p YOU MADE IT

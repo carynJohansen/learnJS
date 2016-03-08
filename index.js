@@ -40,6 +40,10 @@ app.get('/genesearch', function (request, response) {
 	})
 })
 
+app.get('/categorysearch', function (request, response) {
+	response.render('catsearch')
+})
+
 var template = 'Node app is running at localhost: {port~number}'
 var txt = template.replace('{port~number}', app.get('port'))
 
