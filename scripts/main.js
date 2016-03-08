@@ -38,3 +38,15 @@ function searchInputClick() {
 function queryDatabase() {
 	console.log("gene has been queried! Truth is an inevitable trap.")
 }
+
+function genesearch() {
+	window.location.href = '/genesearch'
+}
+
+function catsearch() {
+	window.location.href = '/categorysearch'
+}
+
+function gohome() {
+	window.location.href = '/'
+}
