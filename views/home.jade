@@ -75,7 +75,7 @@ html
       .col-lg-6
         .input-group
           form(action='/home', method='POST', name='geneQuery')
-            input#genesearch.form-control(type='text', placeholder='Search for...', name='genesearch')
+            input#genesearch.form-control(type='text', placeholder='Search for...')
             span.input-group-btn
               button#buttonsearch.btn.btn-default(type='button') Search!
         // /input-group
@@ -83,8 +83,10 @@ html
     // .container
   .container
     .row
-      .darkBG.col-sm-6.col-xs-12
-        button(onclick="genesearch()") Gene Search
-      .darkBG.col-sm-6.col-xs-12
-        button(onclick="catsearch()") Category Search
+      .input-group
+          form(action='/home', method='POST', name='queryOptions')
+            .darkBG.col-sm-6.col-xs-12
+              button#bygene.btn.btn-default(type='button') Gene Search
+            .darkBG.col-sm-6.col-xs-12
+              button#bycategories.btn.btn-default(type='button') Category Search
     script(src='main.js')

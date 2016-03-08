@@ -1,8 +1,12 @@
 var genesearch = document.getElementById("genesearch");
 var buttonsearch = document.getElementById("buttonsearch");
-console.log("hi")
+var bygene = document.getElementById("bygene")
+var bycat = document.getElementById("bycategories")
+
 console.log(genesearch)
 console.log(buttonsearch)
+console.log(bygene)
+console.log(bycat)
 //console.log(genesearch.length)
 
 //var input = genesearch.querySelectorAll("input");
@@ -13,6 +17,8 @@ console.log(buttonsearch)
 genesearch.addEventListener("click", editItem)
 genesearch.addEventListener("keypress", searchInputKey)
 buttonsearch.addEventListener("click", searchInputClick)
+bygene.addEventListener("click", genesearch)
+bycat.addEventListener("click", catsearch)
 
 
 function editItem() {
@@ -37,4 +43,16 @@ function searchInputClick() {
 
 function queryDatabase() {
 	console.log("gene has been queried! Truth is an inevitable trap.")
+}
+
+function genesearch() {
+	window.location.href = '/genesearch'
+}
+
+function catsearch() {
+	window.location.href = '/categorysearch'
+}
+
+function gohome() {
+	window.location.href = '/'
 }
