@@ -37,3 +37,6 @@ jspm_packages
 .jpg
 .pdf
 .png
+
+#databases
+.db
