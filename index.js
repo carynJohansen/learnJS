@@ -19,6 +19,8 @@ var util = require('util')
 app.set('port', (process.env.PORT || 5000))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'jade')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 //console.log('hi')
 
@@ -33,8 +35,27 @@ app.get('/', function (request, response) {
     })
 })
 
+app.get('/api/test', function(req, res) {
+	var serverInput = req.query.serverInput;
+	var output;
+	console.log(serverInput)
+	switch(serverInput) {
+		case 'hello':
+			output = 'hi';
+			break;
+		case 'goodbye':
+			output = 'fine';
+			break;
+		default:
+			output = 'sad';
+	}
+	res.json({
+		hi: output,
+		bee: 7
+	});
+});
+
 app.get('/genesearch', function (request, response) {
-	//console.log(request.body.genesearch)
 	response.render('anotherpage', {
 		title: 'Second Page'
 	})

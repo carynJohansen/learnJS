@@ -7,6 +7,7 @@ html
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous')
     // Optional theme
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css', integrity='sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r', crossorigin='anonymous')
+    script(src='https://code.jquery.com/jquery-2.2.1.min.js')
   body
     header.navbar-inverse(rolw='banner')
       .container-fluid
@@ -89,4 +90,7 @@ html
               button#bygene.btn.btn-default(type='button') Gene Search
             .darkBG.col-sm-6.col-xs-12
               button#bycategories.btn.btn-default(type='button') Category Search
+  .container
+    input#input-stuff
+    button#test
     script(src='main.js')

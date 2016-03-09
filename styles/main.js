@@ -17,8 +17,8 @@ console.log(bycat)
 genesearch.addEventListener("click", editItem)
 genesearch.addEventListener("keypress", searchInputKey)
 buttonsearch.addEventListener("click", searchInputClick)
-bygene.addEventListener("click", genesearch)
-bycat.addEventListener("click", catsearch)
+//bygene.addEventListener("click", genesearch)
+//bycat.addEventListener("click", catsearch)
 
 
 function editItem() {
@@ -45,9 +45,15 @@ function queryDatabase() {
 	console.log("gene has been queried! Truth is an inevitable trap.")
 }
 
-function genesearch() {
-	window.location.href = '/genesearch'
-}
+$( document ).ready(function () {
+	$('#bygene').on('click', function() {
+		$.ajax({
+			url: '/genesearch'
+		}).done(function(res) {
+			console.log('you have done it!')
+	})
+	})
+})
 
 function catsearch() {
 	window.location.href = '/categorysearch'
@@ -56,3 +62,19 @@ function catsearch() {
 function gohome() {
 	window.location.href = '/'
 }
+
+$(document).ready(function() {
+	$('#test').on('click', function() {
+		var input = $('#input-stuff').val();
+		console.log('the input stuff is ', input);
+
+		$.ajax({
+			url: '/api/test',
+			data: {
+				serverInput: input
+			}
+		}).done(function(res) {
+			console.log(res);
+		});
+	});
+});
