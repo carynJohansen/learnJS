@@ -62,24 +62,17 @@ $(document).ready(function() {
 			data: {
 				serverInput: input
 			}
-		}).done(function(res) {
-			console.log(res);
+		}).done(function(input) {
+			console.log(input);
 		});
 	}); //close #test
+
 	$('#bygene').on('click', function() {
-		$.ajax({
-			url: '/genesearch',
-			type: 'POST',
-			success: function() {
-				alert('Success!')
-			}
-		})
-	})
+		$.get('/genesearch');
+	}) // close bygene
+
 	$('#bycat').on('click', function() {
 		console.log('Difficulties strenthen the mind')
-		$.ajax({
-			url: '/categorysearch',
-			type: 'POST'
-		})
-	})
+		$.post('/catsearch');
+	}) //close bycat
 });

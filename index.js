@@ -49,10 +49,14 @@ app.get('/api/test', function(req, res) {
 		default:
 			output = 'sad';
 	}
-	res.render('anotherpage');
+	res.json({
+		hi: output,
+		bee: 'knees'
+	});
 });
 
 app.post('/genesearch', function (request, response) {
+	console.log('you made it to genesearch!')
 	response.render('anotherpage', {
 		title: 'Second Page'
 	})
