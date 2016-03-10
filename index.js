@@ -35,6 +35,12 @@ app.get('/', function (request, response) {
     })
 })
 
+app.get('/home', function (request, response) {
+	response.render('home', {
+		title: 'Gene Search Home'
+	})
+})
+
 app.get('/api/test', function(req, res) {
 	var serverInput = req.query.serverInput;
 	var output;
@@ -57,12 +63,22 @@ app.get('/api/test', function(req, res) {
 
 app.post('/genesearch', function (request, response) {
 	console.log('you made it to genesearch!')
-	response.render('anotherpage', {
-		title: 'Second Page'
+	response.render('genesearch', {
+		title: 'Gene Search'
+	})
+})
+
+app.get('/genesearch', function (request, response) {
+	response.render('genesearch', {
+		title: 'Gene Search'
 	})
 })
 
 app.post('/categorysearch', function (request, response) {
+	response.render('catsearch')
+})
+
+app.get('/categorysearch', function (request, response) {
 	response.render('catsearch')
 })
 

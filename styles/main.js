@@ -66,13 +66,4 @@ $(document).ready(function() {
 			console.log(input);
 		});
 	}); //close #test
-
-	$('#bygene').on('click', function() {
-		$.get('/genesearch');
-	}) // close bygene
-
-	$('#bycat').on('click', function() {
-		console.log('Difficulties strenthen the mind')
-		$.post('/catsearch');
-	}) //close bycat
 });
