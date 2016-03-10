@@ -49,19 +49,16 @@ app.get('/api/test', function(req, res) {
 		default:
 			output = 'sad';
 	}
-	res.json({
-		hi: output,
-		bee: 7
-	});
+	res.render('anotherpage');
 });
 
-app.get('/genesearch', function (request, response) {
+app.post('/genesearch', function (request, response) {
 	response.render('anotherpage', {
 		title: 'Second Page'
 	})
 })
 
-app.get('/categorysearch', function (request, response) {
+app.post('/categorysearch', function (request, response) {
 	response.render('catsearch')
 })
 

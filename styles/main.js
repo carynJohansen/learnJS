@@ -14,9 +14,9 @@ console.log(bycat)
 //var button = genesearch.querySelectorAll("button")
 //console.log(button)
 
-genesearch.addEventListener("click", editItem)
-genesearch.addEventListener("keypress", searchInputKey)
-buttonsearch.addEventListener("click", searchInputClick)
+//genesearch.addEventListener("click", editItem)
+//genesearch.addEventListener("keypress", searchInputKey)
+//buttonsearch.addEventListener("click", searchInputClick)
 //bygene.addEventListener("click", genesearch)
 //bycat.addEventListener("click", catsearch)
 
@@ -34,26 +34,15 @@ function searchInputKey() {
 		queryDatabase.call(this.value)
 	}
 }
-
-function searchInputClick() {
-	var gene = genesearch.value
-	console.log(gene)
-	queryDatabase.call(this.value)
-}
-
-function queryDatabase() {
-	console.log("gene has been queried! Truth is an inevitable trap.")
-}
-
-$( document ).ready(function () {
-	$('#bygene').on('click', function() {
-		$.ajax({
-			url: '/genesearch'
-		}).done(function(res) {
-			console.log('you have done it!')
-	})
-	})
-})
+//function () {
+//	$('#bygene').on('click', function() {
+//		$.ajax({
+//			url: '/genesearch'
+//		}).done(function(res) {
+//			console.log('you have done it!')
+//		})
+//	})
+//})
 
 function catsearch() {
 	window.location.href = '/categorysearch'
@@ -66,7 +55,7 @@ function gohome() {
 $(document).ready(function() {
 	$('#test').on('click', function() {
 		var input = $('#input-stuff').val();
-		console.log('the input stuff is ', input);
+		console.log('the input stuff is', input);
 
 		$.ajax({
 			url: '/api/test',
@@ -76,5 +65,21 @@ $(document).ready(function() {
 		}).done(function(res) {
 			console.log(res);
 		});
-	});
+	}); //close #test
+	$('#bygene').on('click', function() {
+		$.ajax({
+			url: '/genesearch',
+			type: 'POST',
+			success: function() {
+				alert('Success!')
+			}
+		})
+	})
+	$('#bycat').on('click', function() {
+		console.log('Difficulties strenthen the mind')
+		$.ajax({
+			url: '/categorysearch',
+			type: 'POST'
+		})
+	})
 });

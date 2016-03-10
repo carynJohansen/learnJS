@@ -87,10 +87,10 @@ html
       .input-group
           form(action='/home', method='POST', name='queryOptions')
             .darkBG.col-sm-6.col-xs-12
-              button#bygene.btn.btn-default(type='button') Gene Search
+              button#bygene.btn.btn-default(type='button', data-link='ajax') Gene Search
             .darkBG.col-sm-6.col-xs-12
-              button#bycategories.btn.btn-default(type='button') Category Search
+              button#bycategories.btn.btn-default(type='button', data-line='ajax') Category Search
   .container
-    input#input-stuff
+    input#input-stuff(data-link='ajax')
     button#test
     script(src='main.js')
