@@ -2,7 +2,7 @@ doctype html
 html
   head
     title Gene Input
-    link(rel='stylesheet', type='text/css', href='main.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/main.css')
     // Latest compiled and minified CSS
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous')
     // Optional theme
@@ -78,24 +78,5 @@ html
           a.btn.btn-primary(href='/genesearch', role='button') Gene Search
         .darkBG.col-sm-6.col-xs-12
           a.btn.btn-primary(href='/categorysearch', role='button') Category Search
-        // /input-group
-      // .col-lg-6
-    // .container
-  .container
-    .row
-      .input-group
-          form(action='/home', method='POST', name='queryOptions')
-            .darkBG.col-sm-6.col-xs-12
-              a(href='/genesearch') Gene Search
-            .darkBG.col-sm-6.col-xs-12
-              button#bycategories.btn.btn-default(type='button', data-link='ajax') Category Search
-  .container
-    input#input-stuff(data-link='ajax')
-    button#test TEST
-  .container
-    a.btn.btn-primary(href='/genesearch', role='button') Gene Search
-  .container
-    form.inline(action='genesearch')
-      button.float-left.submit-button Gene Search
 
-    script(src='main.js')
+    script(src='javascripts/main.js')

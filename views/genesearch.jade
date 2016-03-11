@@ -2,7 +2,7 @@ doctype html
 html
   head
     title Gene Input
-    link(rel='stylesheet', type='text/css', href='main.css')
+    link(rel='stylesheet', type='text/css', href='stylesheets/main.css')
     // Latest compiled and minified CSS
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7', crossorigin='anonymous')
     // Optional theme
@@ -71,8 +71,12 @@ html
 
     p GENE SEARCH!
 
+    .col-lg-6
+      .input-group
+        input#geneIn(data-link='ajax', placeholder='Search for...')
+        button#geneClick Go!
+
     .container
-      .darkBG.col-sm-6.col-xs-12
-        input#input-stuff(data-link='ajax')
-        button#test Search
-    script(src='genesearch.js')
+      h2#results
+
+    script(src="javascripts/genesearch.js")
