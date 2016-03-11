@@ -81,7 +81,7 @@ app.get('/genesearch', function (request, response) {
 	})
 })
 
-app.get('/searching', function (request, response) {
+app.post('/searching', function (request, response) {
 	//console.log("this is in the server", geneval)
 
 	function show() {
@@ -90,7 +90,7 @@ app.get('/searching', function (request, response) {
 
 		gene_vcf_search(geneval).then(function (geneJSON) {
 			console.log(geneJSON)
-			response.render('represent', { results : geneJSON })
+			response.send(geneJSON)
 		}) // close promise
 	} //close show
 

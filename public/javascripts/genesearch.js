@@ -14,10 +14,11 @@ $(function () {
 			url: '/searching',
 			data: {
 				geneInput : in_gene
+			},
+			success: function(data) {
+				$("#AJAXresults").html();
 			}
-		}).done(function (in_gene) {
-			console.log(in_gene)
-		}) //close done
+		}); //close .ajax
 //		$.get('searching', parameters, function (data) {
 //			console.log(data)
 //			$('#results').html(data);

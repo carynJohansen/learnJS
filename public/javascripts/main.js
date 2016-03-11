@@ -3,7 +3,6 @@
 ////    client side     ////
 ///////////////////////////
 
-
 $(document).ready(function() {
 	$('#test').on('click', function() {
 		var input = $('#input-stuff').val();
