@@ -20,6 +20,7 @@ $(function () {
 //			}
 //		}); //close .ajax
 		$.get('searching', parameters, function (data) {
+			console.log("this is the client side data")
 			console.log(data)
 			$('#AJAXresults').html(data);
 		}); //close get

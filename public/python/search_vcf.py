@@ -63,11 +63,23 @@ def get_vcf_info ( info_dict ):
 	start = info_dict['start']
 	end = info_dict['end']
 
-	vcf_reader = get_vcf_reader()
+	vcf = get_vcf_reader()
 
 	gene_records = []
-	for record in vcf_reader.fetch(chrom, start, end):
-		gene_records.append(record)
+	for rec in vcf.fetch(chrom, start, end):
+		for sample in rec.samples:
+			rw = {
+				"sample" : sample.sample,
+				"chromosome" : rec.CHROM,
+				"position" : rec.POS,
+				"reference" : rec.REF,
+				"alternate" : str(rec.ALT[0]),
+				"genotype" : sample['GT'],
+				"SNPEFF_effect" : rec .INFO['SNPEFF_EFFECT'],
+				"SNPEFF_FUNCTIONAL_CLASS" : rec.INFO['SNPEFF_FUNCTIONAL_CLASS']
+			}
+			gene_records.append(rw)
+
 
 	return gene_records
 
