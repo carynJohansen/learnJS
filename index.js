@@ -81,40 +81,40 @@ app.get('/genesearch', function (request, response) {
 	})
 })
 
-app.post('/searching', function (request, response) {
-	//console.log("this is in the server", geneval)
+app.get('/searching', function (request, response) {
+	//response.send('oh hi')
+	var geneval = request.query.search
+	console.log("this is in the server", geneval)
 
-	function show() {
-		console.log('this is in show()')
-		var geneval = request.query.geneInput
+	show_geneval = "<h2>"+geneval+"</h2>"
+	response.send(show_geneval)
+//	function show() {
+//		console.log('this is in show()')
+//		var geneval = request.query.geneInput
+//		gene_vcf_search(geneval).then(function (geneJSON) {
+//			console.log(geneJSON)
+//			response.send(geneJSON)
+//		}) // close promise
+//	} //close show
+//	function gene_vcf_search (gene) {
+//		return new Promise( function (fulfill, reject) {
+//			console.log("you are in gene_vcf_search and this is the gene:", gene)
+//			var python = child.spawn('python', [__dirname + '/public/python/search_vcf.py', gene])
+//			console.log(python)
+//			var chunk = ''
+//			python.stdout.on('data', function (data) {
+//				chunk += data
+//				fulfill(chunk)
+//			}) //close stdout
+//			python.stderr.on('data', function (data) {
+//				console.log('python err: ' + data)
+//				response.end('python error in allele counts!' + data)
+//			}) //close stderr
+//			console.log(chunk)
+//		}) // close promise
+//	} // close gene_vcf_search
 
-		gene_vcf_search(geneval).then(function (geneJSON) {
-			console.log(geneJSON)
-			response.send(geneJSON)
-		}) // close promise
-	} //close show
-
-	function gene_vcf_search (gene) {
-		return new Promise( function (fulfill, reject) {
-			console.log("you are in gene_vcf_search and this is the gene:", gene)
-			var python = child.spawn('python', [__dirname + '/public/python/search_vcf.py', gene])
-			console.log(python)
-			var chunk = ''
-
-			python.stdout.on('data', function (data) {
-				chunk += data
-				fulfill(chunk)
-			}) //close stdout
-
-			python.stderr.on('data', function (data) {
-				console.log('python err: ' + data)
-				response.end('python error in allele counts!' + data)
-			}) //close stderr
-			console.log(chunk)
-		}) // close promise
-	} // close gene_vcf_search
-
-	show()
+//	show()
 
 }) // close searching
 
