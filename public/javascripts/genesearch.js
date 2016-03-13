@@ -18,20 +18,21 @@ $(function () {
 			
 			success: function(data) {
 				var dataParsed = JSON.parse(data)
-				console.log(dataParsed)
-				console.log("you're in data, and it should be json:", data)
+				//console.log(dataParsed)
+				//console.log("you're in data, and it should be json:", data)
+				var output = $('#VCFinfo')
 				$(dataParsed).each(function (index, item) {
 					console.log(item)
-					var ouput = ''
-					output += '<tr>'
-					output += '<td>' + item.chromosome + '</td>'
-					output += '<td>' + item.sample + '</td>'
-					output += '<td>' + item.reference + '</td>'
-					output += '<td>' + item.alternate + '</td>'
-					output += '<td>' + item.position + '</td>'
-					output += '<td>'+ item.SNPEFF_effect + '</td>'
-					output += '</tr>'
-					$('#output').append(output);
+					var rw = '<tr>'
+					rw += '<td>' + item.chromosome + '</td>'
+					rw += '<td>' + item.sample + '</td>'
+					rw += '<td>' + item.reference + '</td>'
+					rw += '<td>' + item.alternate + '</td>'
+					rw += '<td>' + item.position + '</td>'
+					rw += '<td>'+ item.SNPEFF_effect + '</td>'
+					rw += '</tr>'
+					console.log(rw)
+					output.append(rw);
 				})
 				$("#AJAXresults").html(data);
 			}

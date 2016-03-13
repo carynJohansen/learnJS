@@ -92,6 +92,7 @@ app.get('/searching', function (request, response) {
 		var geneval = request.query.geneInput
 		console.log('geneval in show():', geneval)
 		gene_vcf_search(geneval).then(function (geneJSON) {
+			console.log(geneJSON)
 			response.send(geneJSON)
 		}) // close promise
 	} //close show
