@@ -83,14 +83,14 @@ app.get('/genesearch', function (request, response) {
 
 app.get('/searching', function (request, response) {
 	//response.send('oh hi')
-	var geneval = request.query.search
+	var geneval = request.query.geneInput //this is for the ajax .get
 	console.log("this is in the server", geneval)
 
 //	show_geneval = "<h2>"+geneval+"</h2>"
 //	response.send(show_geneval)
 	function show() {
-		console.log('this is in show()')
-		var geneval = request.query.search
+		var geneval = request.query.geneInput
+		console.log('geneval in show():', geneval)
 		gene_vcf_search(geneval).then(function (geneJSON) {
 			response.send(geneJSON)
 		}) // close promise

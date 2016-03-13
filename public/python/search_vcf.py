@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 import json
 import re
+import json
 
 #import config
 import vcf
@@ -79,9 +80,9 @@ def get_vcf_info ( info_dict ):
 				"SNPEFF_FUNCTIONAL_CLASS" : rec.INFO['SNPEFF_FUNCTIONAL_CLASS']
 			}
 			gene_records.append(rw)
-
-
-	return gene_records
+	#print type(gene_records)
+	gene_json = json.dumps(gene_records[0:10])
+	return gene_json
 
 ###############################
 #            Main             #
