@@ -23,10 +23,6 @@ $(function () {
 				$('#sort_category').on('change', function() {
 					if (this.value == 'sample') {
 						$('#sample').show()
-//						$('#myTab a').click(function (e) {
-//							e.preventDefault()
-//							$(this).tab('show')
-//						}) // close tab click
 						var output = $('#VCFinfo')
 						$(dataParsed).each(function (index, item) {
 							console.log(item)
@@ -42,14 +38,19 @@ $(function () {
 							console.log(rw)
 							output.append(rw);
 						}) // close dataParsed.each function
-//						$('#resultsSample').prepend('<div id="tabs1"><ul></ul></div>')
+					} // close if sample
+					if (this.value == 'position') {
+						$('#sample').hide()
 //						var tablehead = '<table class="table"><thead class="thead-default"><tr><th>Chromosome</th><th>Position</th><th>Reference</th><th>Alt</th><th>Genotype</th><th>SNPEFF Effect</th></tr></thead>'
 //						$('#tabs1').append(tablehead)
-//						$(dataParsed).each(function (index, item) {
-//							var tabs = '<li><a href="#tabs1-' + item.sample + '">' + item.sample + '</a></li>'
-//							console.log(tabs)
-//							$('#tabs1 ul').append(tabs)
-//							var rw = ''
+						var counter = 0
+						$(dataParsed).each(function (index, item) {
+							counter = counter + 1
+							console.log(item.position)
+							var tabs = '<li><a href="#' + item.position + '-' + counter + '" data-toggle="tab">' + item.position + '</a></li>'
+							console.log(tabs)
+							$('#positionTab').append(tabs)
+							var rw = '<div class="tab-pane" id="' + item.position + '-' + counter + '">' + item.sample + '</div>'
 //							rw += '<td>' + item.chromosome + '</td>'
 //							rw += '<td>' + item.sample + '</td>'
 //							rw += '<td>' + item.position + '</td>'
@@ -58,17 +59,11 @@ $(function () {
 //							rw += '<td>' + item.genotype + '</td>'
 //							rw += '<td>'+ item.SNPEFF_effect + '</td>'
 //							rw += '</tr>'
-//							$('#tabs1').append(rw);
-//						}) //close dataParsed each
-//						$('#sample').show()
-					} 
-					if (this.value == 'position') {
-						$('#sample').hide()
+							$('#tabContent').append(rw);
+						}) //close dataParsed each
 						$('#position').show()
-					}
-				}) 
-				
-				//console.log(dataParsed)
+					} //close if position
+				})
 				console.log("you're in client and length of data is:", data.length)
 //				$("#AJAXresults").html(data);
 			} //close success

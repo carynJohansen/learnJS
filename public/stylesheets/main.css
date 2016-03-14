@@ -6,6 +6,10 @@ div.main {
 	margin: 10%;
 }
 
+#geneClick {
+	display: block;
+}
+
 #search {
 	text-align: center;
 	width:500px;

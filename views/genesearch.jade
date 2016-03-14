@@ -8,19 +8,18 @@ block content
         h4 Search for a Gene
         .input-group
           input#geneIn(data-link='ajax', placeholder='Search for...')
+          h4 Select result display and sort options:
+          select#sort_category
+            option(value='') Select category
+            option(value='sample') By sample
+            option(value='position') By position
+            option(value='SNPEFF_effect') By SNPEFF effect
+            option(value='genotype') By genotype
+          
           button#geneClick Go!
   .container#searchresults
     .jumbotron
       h4 Search results for: the gene you search for....
-
-    .container#sort_options
-      h4 Select result display and sort options:
-      select#sort_category
-        option(value='') Select category
-        option(value='sample') By sample
-        option(value='position') By position
-        option(value='SNPEFF_effect') By SNPEFF effect
-        option(value='genotype') By genotype
 
     .container#sample
       h4 here are the loop outputs
@@ -37,20 +36,8 @@ block content
         tbody#VCFinfo
 
     .container#position
-      ul#myTab.nav.nav-tabs
-        li.active
-          a(href='#home', data-toggle='tab') Home
-        li
-          a(href='#profile', data-toggle='tab') Profile
-        li
-          a(href='#messages', data-toggle='tab') Messages
-        li
-          a(href='#settings', data-toggle='tab') Settings
-        .tab-content
-          #home.tab-pane Home
-          #profile.tab-pane Profile
-          #messages.tab-pane Message
-          #settings.tab-pane Settings
+      ul#positionTab.nav.nav-tabs
+      .tab-content#tabContent
 
     .container#hide
       h4 here are the loop outputs
