@@ -13,3 +13,23 @@ div.main {
 	font-size:3.5em;
 	border-radius:8px;
 }
+
+#searchresults {
+	display: none;
+}
+
+#sample {
+	display: none;
+}
+
+#position {
+	display: none;
+}
+
+#sort_options_show {
+	display: initial;
+}
+
+#hide {
+	display: none;
+}

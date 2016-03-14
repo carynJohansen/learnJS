@@ -2,14 +2,27 @@ extends ./top.jade
 
 block content
 
-    p Search For a Gene
-
-    .col-lg-6
-      .input-group
-        input#geneIn(data-link='ajax', placeholder='Search for...')
-        button#geneClick Go!
-
+  .jumbotron#searchbox
     .container
+      .col-lg-6
+        h4 Search for a Gene
+        .input-group
+          input#geneIn(data-link='ajax', placeholder='Search for...')
+          button#geneClick Go!
+  .container#searchresults
+    .jumbotron
+      h4 Search results for: the gene you search for....
+
+    .container#sort_options
+      h4 Select result display and sort options:
+      select#sort_category
+        option(value='') Select category
+        option(value='sample') By sample
+        option(value='position') By position
+        option(value='SNPEFF_effect') By SNPEFF effect
+        option(value='genotype') By genotype
+
+    .container#sample
       h4 here are the loop outputs
       table.table
         thead.thead-default
@@ -21,7 +34,37 @@ block content
             th Alt
             th Genotype
             th SNPEFF Effect
-
         tbody#VCFinfo
 
+    .container#position
+      ul#myTab.nav.nav-tabs
+        li.active
+          a(href='#home', data-toggle='tab') Home
+        li
+          a(href='#profile', data-toggle='tab') Profile
+        li
+          a(href='#messages', data-toggle='tab') Messages
+        li
+          a(href='#settings', data-toggle='tab') Settings
+        .tab-content
+          #home.tab-pane Home
+          #profile.tab-pane Profile
+          #messages.tab-pane Message
+          #settings.tab-pane Settings
+
+    .container#hide
+      h4 here are the loop outputs
+      table.table
+        thead.thead-default
+          tr
+            th Chromosome
+            th Sample
+            th Position
+            th Reference
+            th Alt
+            th Genotype
+            th SNPEFF Effect
+        tbody#VCFinfo
+
+    script(src="js/bootstrap.min.js")
     script(src="javascripts/genesearch.js")
