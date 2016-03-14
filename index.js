@@ -92,7 +92,7 @@ app.get('/searching', function (request, response) {
 		var geneval = request.query.geneInput
 		console.log('geneval in show():', geneval)
 		gene_vcf_search(geneval).then(function (geneJSON) {
-			console.log(geneJSON)
+			console.log("length of python result here is:", geneJSON.length)
 			response.send(geneJSON)
 		}) // close promise
 	} //close show
@@ -100,16 +100,17 @@ app.get('/searching', function (request, response) {
 		return new Promise( function (fulfill, reject) {
 			console.log("you are in gene_vcf_search and this is the gene:", gene)
 			var python = child.spawn('python', [__dirname + '/public/python/search_vcf.py', gene])
-			var chunk = ''
-			python.stdout.on('data', function (data) {
-				chunk += data
-				fulfill(chunk)
+			var data = ''
+			python.stdout.on('data', function (chunk) {
+				data += chunk
 			}) //close stdout
+			python.stdout.on('end', function() {
+				fulfill(data)
+			})
 			python.stderr.on('data', function (data) {
 				console.log('python err: ' + data)
 				response.end('python error in allele counts!' + data)
 			}) //close stderr
-			console.log(chunk)
 		}) // close promise
 	} // close gene_vcf_search
 	show()

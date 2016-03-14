@@ -81,7 +81,7 @@ def get_vcf_info ( info_dict ):
 			}
 			gene_records.append(rw)
 	#print type(gene_records)
-	gene_json = json.dumps(gene_records[0:39])
+	gene_json = json.dumps(gene_records)
 	return gene_json
 
 ###############################

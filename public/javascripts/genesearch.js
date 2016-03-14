@@ -19,7 +19,7 @@ $(function () {
 			success: function(data) {
 				var dataParsed = JSON.parse(data)
 				//console.log(dataParsed)
-				//console.log("you're in data, and it should be json:", data)
+				console.log("you're in client and length of data is:", data.length)
 				var output = $('#VCFinfo')
 				$(dataParsed).each(function (index, item) {
 					console.log(item)
