@@ -20,6 +20,8 @@ $(function () {
 			
 			success: function(data) {
 				var dataParsed = JSON.parse(data)
+				var positions = _.keys(_.countBy(dataParsed, function (x) { return x.position}))
+				console.log(positions)
 				$('#sort_category').on('change', function() {
 					if (this.value == 'sample') {
 						$('#sample').show()

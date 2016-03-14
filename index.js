@@ -14,6 +14,7 @@ var request = require('request');
 var bodyParser = require('body-parser')
 var jade = require('jade')
 var child = require('child_process')
+var _ = require('underscore')
 
 //Database connection
 var sqlite3 = require('sqlite3').verbose()
