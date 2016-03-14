@@ -34,9 +34,12 @@ jspm_packages
 .node_repl_history
 
 # Images
-.jpg
-.pdf
-.png
+*.jpg
+*.pdf
+*.png
 
-#databases
-.db
+# databases
+*.db
+
+# Data
+data
