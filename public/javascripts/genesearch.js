@@ -26,9 +26,10 @@ $(function () {
 					var rw = '<tr>'
 					rw += '<td>' + item.chromosome + '</td>'
 					rw += '<td>' + item.sample + '</td>'
+					rw += '<td>' + item.position + '</td>'
 					rw += '<td>' + item.reference + '</td>'
 					rw += '<td>' + item.alternate + '</td>'
-					rw += '<td>' + item.position + '</td>'
+					rw += '<td>' + item.genotype + '</td>'
 					rw += '<td>'+ item.SNPEFF_effect + '</td>'
 					rw += '</tr>'
 					console.log(rw)
