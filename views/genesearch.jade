@@ -8,21 +8,22 @@ block content
         h4 Search for a Gene
         .input-group
           input#geneIn(data-link='ajax', placeholder='Search for...')
-          h4 Select result display and sort options:
-          select#sort_category
-            option(value='') Select category
-            option(value='sample') By sample
-            option(value='position') By position
-            option(value='SNPEFF_effect') By SNPEFF effect
-            option(value='genotype') By genotype
-          
           button#geneClick Go!
   .container#searchresults
     .jumbotron
       h4 Search results for: the gene you search for....
 
+    .container
+      h4 Select result display and sort options 
+        select#sort_category
+          option(value='') Select category
+          option(value='no_sort') no sort
+          option(value='sample') by sample
+          option(value='position') by position
+          option(value='SNPEFF_effect') by SNPEFF effect
+          option(value='genotype') by genotype
+
     .container#sample
-      h4 here are the loop outputs
       table.table
         thead.thead-default
           tr
@@ -53,6 +54,6 @@ block content
             th SNPEFF Effect
         tbody#VCFinfo
 
-    script(src="js/bootstrap.min.js")
     script(src="js/underscore-min.js")
+    script(src="js/bootstrap.min.js")
     script(src="javascripts/genesearch.js")

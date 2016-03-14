@@ -27,7 +27,6 @@ $(function () {
 						$('#sample').show()
 						var output = $('#VCFinfo')
 						$(dataParsed).each(function (index, item) {
-							console.log(item)
 							var rw = '<tr>'
 							rw += '<td>' + item.chromosome + '</td>'
 							rw += '<td>' + item.sample + '</td>'
@@ -37,7 +36,6 @@ $(function () {
 							rw += '<td>' + item.genotype + '</td>'
 							rw += '<td>'+ item.SNPEFF_effect + '</td>'
 							rw += '</tr>'
-							console.log(rw)
 							output.append(rw);
 						}) // close dataParsed.each function
 					} // close if sample
@@ -46,22 +44,30 @@ $(function () {
 //						var tablehead = '<table class="table"><thead class="thead-default"><tr><th>Chromosome</th><th>Position</th><th>Reference</th><th>Alt</th><th>Genotype</th><th>SNPEFF Effect</th></tr></thead>'
 //						$('#tabs1').append(tablehead)
 						var counter = 0
-						$(dataParsed).each(function (index, item) {
-							counter = counter + 1
-							console.log(item.position)
-							var tabs = '<li><a href="#' + item.position + '-' + counter + '" data-toggle="tab">' + item.position + '</a></li>'
-							console.log(tabs)
+						$(positions).each(function (index, item) {
+							filteredJSON = dataParsed.filter(function (x) {
+								return x.position = item;
+							})
+							var tabs = '<li><a href="#' + item +'" data-toggle="tab">' + item + '</a></li>'
 							$('#positionTab').append(tabs)
-							var rw = '<div class="tab-pane" id="' + item.position + '-' + counter + '">' + item.sample + '</div>'
-//							rw += '<td>' + item.chromosome + '</td>'
-//							rw += '<td>' + item.sample + '</td>'
-//							rw += '<td>' + item.position + '</td>'
-//							rw += '<td>' + item.reference + '</td>'
-//							rw += '<td>' + item.alternate + '</td>'
-//							rw += '<td>' + item.genotype + '</td>'
-//							rw += '<td>'+ item.SNPEFF_effect + '</td>'
-//							rw += '</tr>'
-							$('#tabContent').append(rw);
+							var panel = '<div class="tab-pane" id="' + item + '">'
+							$('#tabContent').append(panel)
+							var tablehead = '<table class="table"><tr><th>Chromosome</th><th>Sample</th><th>Position</th><th>Reference</th><th>Alt</th><th>Genotype</th><th>SNPEFF Effect</th></tr></thead>'
+							$('#tabContent').append(tablehead)
+							$(filteredJSON).each(function (i, elem) {
+								var rw = '<tr>'
+								rw += '<td>' + elem.chromosome + '</td>'
+								rw += '<td>' + elem.sample + '</td>'
+								rw += '<td>' + elem.position + '</td>'
+								rw += '<td>' + elem.reference + '</td>'
+								rw += '<td>' + elem.alternate + '</td>'
+								rw += '<td>' + elem.genotype + '</td>'
+								rw += '<td>'+ elem.SNPEFF_effect + '</td>'
+								rw += '</tr>'
+								rw += '</div>'
+								console.log(rw)
+								$('#tabContent').append(rw);
+							})
 						}) //close dataParsed each
 						$('#position').show()
 					} //close if position
