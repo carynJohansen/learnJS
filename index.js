@@ -104,13 +104,13 @@ app.get('/searching', function (request, response) {
 			python.stdout.on('data', function (chunk) {
 				data += chunk
 			}) //close stdout
-			python.stdout.on('end', function() {
-				fulfill(data)
-			})
 			python.stderr.on('data', function (data) {
 				console.log('python err: ' + data)
 				response.end('python error in allele counts!' + data)
 			}) //close stderr
+			python.stdout.on('end', function() {
+				fulfill(data)
+			})
 		}) // close promise
 	} // close gene_vcf_search
 	show()
