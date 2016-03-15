@@ -30,6 +30,10 @@ div.main {
 	display: none;
 }
 
+#SNPEFF_effect {
+	display: none;
+}
+
 #sort_options_show {
 	display: initial;
 }
