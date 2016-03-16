@@ -55,6 +55,7 @@ def get_start_stop ( info_line ):
 		"end" : int(splitline[4]),
 		"annotation" : splitline[9]
 	}
+	#print info
 	return info
 
 
@@ -79,9 +80,10 @@ def get_vcf_info ( info_dict ):
 				"SNPEFF_effect" : rec .INFO['SNPEFF_EFFECT'],
 				"SNPEFF_FUNCTIONAL_CLASS" : rec.INFO['SNPEFF_FUNCTIONAL_CLASS']
 			}
+			#print rw
 			gene_records.append(rw)
-	#print type(gene_records)
-	gene_json = json.dumps(gene_records)
+	#print len(gene_records)
+	gene_json = json.dumps(gene_records[0:399])
 	return gene_json
 
 ###############################
