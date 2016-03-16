@@ -8,6 +8,12 @@ div.main {
 	margin: 10%;
 }
 
+/* make row-fluid scroll horizontally */
+
+#sampleTabs .nav.nav-tabs {
+	overflow-x: scroll;
+}
+
 /* Initial Gene Search Box */
 
 #geneClick {
@@ -17,6 +23,8 @@ div.main {
 #searchresults {
 	display: none;
 }
+
+/* Search Results */
 
 #sample {
 	display: none;
@@ -30,10 +38,17 @@ div.main {
 	display: none;
 }
 
-#sort_options_show {
-	display: initial;
+#test {
+	display: none;
 }
 
 #hide {
 	display: none;
 }
+
+/* Tab Content 
+
+#sample .tab-content {
+	overflow: scroll;
+}
+*/
