@@ -19,7 +19,9 @@ $(function () {
 			},
 			
 			success: function(data) {
-				var dataParsed = JSON.parse(data)
+				//console.log(data.data)
+				//console.log(data.gene)
+				var dataParsed = JSON.parse(data.data)
 				//console.log("length of parsed JSON is", dataParsed.length)
 				var positions = _.keys(_.countBy(dataParsed, function (x) { return x.position}))
 				////console.log(positions)
@@ -27,7 +29,7 @@ $(function () {
 				////console.log(samples)
 				var effects = _.keys(_.countBy(dataParsed, function (x) { return x.SNPEFF_effect}))
 				////console.log(effects)
-
+				$('#gene').append(data.gene)
 				$('#sort_category').on('change', function() {
 					if (this.value == 'sample') {
 						$('#position').hide()
