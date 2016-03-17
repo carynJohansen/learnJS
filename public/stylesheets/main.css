@@ -14,6 +14,12 @@ div.main {
 	overflow-x: scroll;
 }
 
+/* Table Stuff */
+
+.has_alt {
+	background-color: #F75D59;
+}
+
 /* Initial Gene Search Box */
 
 #geneClick {

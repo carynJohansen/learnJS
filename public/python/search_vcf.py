@@ -28,7 +28,7 @@ def get_info ( gene ):
 	for line in info:
 		if re.match(myregex, line):
 			gene_info.append(line)
-
+	
 	#check for multiple isoform information
 	if (len(gene_info) > 1):
 		maxlen = 0
@@ -41,13 +41,12 @@ def get_info ( gene ):
 				maxlen = length
 				gene_info_keep = line
 		return gene_info_keep
-
+	
 	#if there are no isoforms, return gene_info
 	return gene_info
 
 def get_start_stop ( info_line ):
-	splitline = info_line.split('\t')
-
+	splitline = info_line[0].split('\t')
 	info = {
 		"chrom" : splitline[0],
 		"gene_id" : splitline[1],
@@ -55,7 +54,6 @@ def get_start_stop ( info_line ):
 		"end" : int(splitline[4]),
 		"annotation" : splitline[9]
 	}
-	#print info
 	return info
 
 
@@ -65,10 +63,10 @@ def get_vcf_info ( info_dict ):
 	start = info_dict['start']
 	end = info_dict['end']
 
-	vcf = get_vcf_reader()
+	vcf_R = get_vcf_reader()
 
 	gene_records = []
-	for rec in vcf.fetch(chrom, start, end):
+	for rec in vcf_R.fetch(chrom, start, end):
 		for sample in rec.samples:
 			rw = {
 				"sample" : sample.sample,
@@ -77,13 +75,12 @@ def get_vcf_info ( info_dict ):
 				"reference" : rec.REF,
 				"alternate" : str(rec.ALT[0]),
 				"genotype" : sample['GT'],
-				"SNPEFF_effect" : rec .INFO['SNPEFF_EFFECT'],
+				"SNPEFF_effect" : rec.INFO['SNPEFF_EFFECT'],
 				"SNPEFF_FUNCTIONAL_CLASS" : rec.INFO['SNPEFF_FUNCTIONAL_CLASS']
 			}
-			#print rw
 			gene_records.append(rw)
-	#print len(gene_records)
-	gene_json = json.dumps(gene_records[0:399])
+
+	gene_json = json.dumps(gene_records)
 	return gene_json
 
 ###############################
