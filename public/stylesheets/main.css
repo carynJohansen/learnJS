@@ -52,9 +52,9 @@ div.main {
 	display: none;
 }
 
-/* Tab Content 
+/* ////////////// */
+/* Network Search */
 
-#sample .tab-content {
-	overflow: scroll;
+#textQuery {
+	width: 100%;
 }
-*/

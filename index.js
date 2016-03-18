@@ -120,6 +120,12 @@ app.get('/networksearch', function (request, response) {
 	})
 })
 
+app.get('/networkVis', function (request, response) {
+	var net_input = request.query.netInput
+	console.log("you're in networkVis:", net_input)
+	response.json(net_input)
+})
+
 app.post('/categorysearch', function (request, response) {
 	response.render('catsearch')
 })

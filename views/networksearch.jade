@@ -5,5 +5,30 @@ block content
   .container
     .jumbotron
       h4 Query the regulatory interaction database
-  .container
+
+  .container.center-block
     h4 Compose a query statement:
+    .row
+      .col-md-8
+        | Select
+        select#select
+          option(value='' selected disabled) select one
+          option(value='all_genes') all Genes
+          option(value='specific_gene') A specific gene
+        | that are 
+        select#class
+          option(value='' selected disabled) select one
+          option(value='regulator') regulators
+          option(value='target') targets
+          option(value='either') either
+          option(value='both') both
+    br
+    .row
+      .col-md-8
+        textarea#textQuery(data-link='ajax', type='text')
+        br
+        button#netClick I want to search the Interactions
+
+  script(src="js/underscore-min.js")
+  script(src="js/bootstrap.min.js")
+  script(src="javascripts/networksearch.js")
