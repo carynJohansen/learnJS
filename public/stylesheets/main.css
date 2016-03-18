@@ -58,3 +58,11 @@ div.main {
 #textQuery {
 	width: 100%;
 }
+
+#specGeneInput {
+	display: none;
+}
+
+#specGeneClick {
+	display: none;
+}

@@ -9,8 +9,19 @@ $(function () {
 	})
 	$('#select').on('change', function() {
 		if (this.value == 'all_genes') {
+			$('#specGeneInput').hide()
+			$('#specGeneClick').hide()
 			$('#textQuery').val("SELECT * ")
-		} else if (this.value == 'specific_gene')
+		} else if (this.value == 'specific_gene') {
+			$('#specGeneInput').show()
+			$('#specGeneClick').show()
+			$('#specGeneClick').on('click', function () {
+				var specGene = $('#specGeneInput').val()
+				console.log("you've clicked!", specGene)
+				$('#textQuery').val(specGene)
+			})
+		}
+
 	})
 	$('#netClick').on('click', function () {
 		console.log("you clicked!")
