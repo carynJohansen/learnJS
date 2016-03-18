@@ -21,6 +21,10 @@ $(function () {
 			success: function(data) {
 				//console.log(data.data)
 				//console.log(data.gene)
+				if (data.data == 1) {
+					alert('Gene not found. Check gene name.')
+					data.preventDefault()
+				}
 				var dataParsed = JSON.parse(data.data)
 				//console.log("length of parsed JSON is", dataParsed.length)
 				var positions = _.keys(_.countBy(dataParsed, function (x) { return x.position}))

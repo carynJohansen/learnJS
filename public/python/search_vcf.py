@@ -28,6 +28,11 @@ def get_info ( gene ):
 	for line in info:
 		if re.match(myregex, line):
 			gene_info.append(line)
+
+	#error message for not found:
+	if (len(gene_info) == 0):
+		error = "Gene not found."
+		return error
 	
 	#check for multiple isoform information
 	if (len(gene_info) > 1):
@@ -90,6 +95,11 @@ if __name__ == '__main__':
 	file, gene = sys.argv
 
 	info_line = get_info(gene)
+	if (type(info_line) == str ):
+		print 1
+		sys.exit()
+	#print info_line
+	#print type(info_line)
 	info = get_start_stop(info_line)
 	results = get_vcf_info(info)
 	print results

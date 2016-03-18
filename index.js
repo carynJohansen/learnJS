@@ -70,7 +70,7 @@ app.get('/api/test', function(req, res) {
 });
 
 app.post('/genesearch', function (request, response) {
-	console.log('you made it to genesearch!')
+	console.log('you made it to post genesearch!')
 	response.render('genesearch', {
 		title: 'Gene Search'
 	})
