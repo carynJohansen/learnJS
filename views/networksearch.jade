@@ -7,3 +7,17 @@ block content
       h4 Query the regulatory interaction database
   .container
     h4 Compose a query statement:
+    button#queryClick QUERY
+  
+  .container#testresults
+    table.table
+        thead
+          tr
+            th Regulator
+            th Target
+        tbody#netTable
+
+
+  script(src="js/underscore-min.js")
+  script(src="js/bootstrap.min.js")
+  script(src="javascripts/networksearch.js")

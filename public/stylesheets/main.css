@@ -52,9 +52,9 @@ div.main {
 	display: none;
 }
 
-/* Tab Content 
+/* /////////////////// */
+/* Interaction Network */
 
-#sample .tab-content {
-	overflow: scroll;
+#testresults {
+	display: none;
 }
-*/
