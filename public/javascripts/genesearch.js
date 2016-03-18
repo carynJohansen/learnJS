@@ -126,7 +126,8 @@ $(function () {
 								var filteredJSON = dataParsed.filter(function (x, i) {
 									return x.SNPEFF_effect == item;
 								})
-								console.log("length of filtered JSON:", filteredJSON.length)
+								var positions_f = _.keys(_.countBy(dataParsed, function (x) { return x.position}))
+								//console.log("length of filtered JSON:", filteredJSON.length)
 								var tabs = '<li><a href="#' + item +'" data-toggle="tab">' + item + '</a></li>'
 								$('#effectTabs').append(tabs)
 								////console.log($('#effectTab'))
