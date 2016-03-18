@@ -86,9 +86,6 @@ app.get('/searching', function (request, response) {
 	//response.send('oh hi')
 	var geneval = request.query.geneInput //this is for the ajax .get
 	console.log("this is in the server", geneval)
-
-//	show_geneval = "<h2>"+geneval+"</h2>"
-//	response.send(show_geneval)
 	function show() {
 		var geneval = request.query.geneInput
 		console.log('geneval in show():', geneval)
@@ -115,8 +112,13 @@ app.get('/searching', function (request, response) {
 		}) // close promise
 	} // close gene_vcf_search
 	show()
-
 }) // close searching
+
+app.get('/networksearch', function (request, response) {
+	response.render('networksearch', {
+		title: 'Search Interaction Network'
+	})
+})
 
 app.post('/categorysearch', function (request, response) {
 	response.render('catsearch')
