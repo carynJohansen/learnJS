@@ -58,3 +58,9 @@ div.main {
 #testresults {
 	display: none;
 }
+
+#cy {
+  height: 20%;
+  width: 100%;
+  position: absolute;
+}
