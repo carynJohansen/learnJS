@@ -60,7 +60,8 @@ div.main {
 }
 
 #cy {
-  height: 20%;
-  width: 100%;
-  position: absolute;
+  min-height: 200px;
+  max-height: 400px;
+  width: 80%;
+  position: relative;
 }
