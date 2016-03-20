@@ -22,31 +22,50 @@ $(function () {
 					$('#netTable').append(row)
 				}) // close each
 				$('#cy').cytoscape({
-					style: cytoscape.stylesheet()
-					.selector('node')
-						.css({
-						'content': 'data(name)',
-						'text-valign': 'center',
-						'color': 'white',
-						'text-outline-width': 2,
-						'text-outline-color': '#888'
-					})
-					.selector('edge')
-						.css({
-							'target-arrow-shape': 'triangle'
-						})
-					.selector(':selected')
-						.css({
-						'background-color': 'black',
-						'line-color': 'black',
-						'target-arrow-color': 'black',
-						'source-arrow-color': 'black'
-					})
-					.selector('.faded')
-						.css({
-						'opacity': 0.25,
-						'text-opacity': 0
-					}),
+					layout: {
+						name: 'circle'
+					},
+					style : [
+						{
+							selector : 'node',
+							style : {
+								'content': 'data(name)',
+								'text-valign': 'center',
+								'color': 'black',
+								//'text-outline-width': 2,
+								//'text-outline-color': '#888',
+								'height' : 50,
+								'width' : 50,
+								'background-color' : '#e8e406'
+							}
+						},
+						{
+							selector : 'edge',
+							style : {
+								'curve-style' : 'haystack',
+								'haystack-radius' : 0,
+								'width' : 5,
+								'opacity': 0.5,
+								'line-color' : '#EE9A00'
+							}
+						},
+						{
+							selector : ':selected',
+							style : {
+								'background-color': 'black',
+								'line-color': 'black',
+								'target-arrow-color': 'black',
+								'source-arrow-color': 'black'
+							}
+						},
+						{
+							selector : '.faded',
+							style : {
+								'opacity' : 0.25,
+								'text-opacity' : 0
+							}
+						}
+					],
 					elements: {
 						nodes: nodeARR,
 						edges : edgeARR
@@ -68,7 +87,7 @@ $(function () {
 								cy.elements().removeClass('faded');
 							}
 						})
-					} 
+					} // close cytoscape ready function 
 				})// close cytoscape
 			} // close success
 		}) // close ajax
