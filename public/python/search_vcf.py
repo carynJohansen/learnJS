@@ -12,17 +12,27 @@ import json
 #import config
 import vcf
 
+#import configuration script
+import config
+
 #to time the program:
 import time
 
 ###############################
 #          Methods            #
+#LOC_Os02g01110
+def parse_input( gene_str ):
+	g_split = gene_str.split('g')[0]
+	chrom_split = g_split.split('Os')[1]
+	return chrom_split
 
 def get_vcf_reader():
 	return vcf.Reader(open('/Users/caryn/Dropbox/Project_RiceGeneticVariation/data/rice_chr2_3.vcf.gz', 'r'))
 
 def get_info ( gene ):
-	info = open('/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Chr2.locus_brief_info.7.0', 'r')
+	chromNumber = parse_input(gene)
+	infoFile = config.CHROM_INFO_PATH[chromNumber]
+	info = open(infoFile, 'r')
 	gene_info = []
 	myregex = r"(.*)" + re.escape(gene) + r"(.*)"
 	for line in info:
@@ -94,11 +104,12 @@ def get_vcf_info ( info_dict ):
 if __name__ == '__main__':
 	file, gene = sys.argv
 
+	#chrom = parse_input(gene)
 	info_line = get_info(gene)
 	if (type(info_line) == str ):
 		print 1
 		sys.exit()
-	#print info_line
+#	print info_line
 	#print type(info_line)
 	info = get_start_stop(info_line)
 	results = get_vcf_info(info)
