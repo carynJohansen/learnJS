@@ -29,3 +29,5 @@ CHROM_INFO_PATH = {
 	"11" : '/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Chr11.dir/Chr11.locus_brief_info.7.0',
 	"12" : '/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Chr12.dir/Chr12.locus_brief_info.7.0'
 }
+
+PROVEAN = '/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Ines_provean_assemble.out'
