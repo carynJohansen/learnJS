@@ -97,7 +97,7 @@ app.get('/searching', function (request, response) {
 	function gene_vcf_search (gene) {
 		return new Promise( function (fulfill, reject) {
 			console.log("you are in gene_vcf_search and this is the gene:", gene)
-			var python = child.spawn('python', [__dirname + '/public/python/search_vcf.py', gene])
+			var python = child.spawn('python', [__dirname + '/public/python/fetch_genome_information.py', gene])
 			var data = ''
 			python.stdout.on('data', function (chunk) {
 				data += chunk

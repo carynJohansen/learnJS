@@ -29,7 +29,7 @@ $(function () {
 				var dataParsed = JSON.parse(data.data)
 				var scores = dataParsed[1].p_deleteriousScores.split(",")
 				var mutations = dataParsed[1].p_deleteriousMutations.split(",")
-				console.log(scores)
+
 				$(scores).each(function (index, item) {
 					var row = '<tr><td>' + mutations[index] + '</td><td>' + scores[index] + '</td></tr>'
 					$('#proveanInfo').append(row)
@@ -137,7 +137,6 @@ $(function () {
 								var filteredJSON = dataParsed.filter(function (x, i) {
 									return x.SNPEFF_effect == item;
 								})
-								console.log("length of filtered JSON:", filteredJSON.length)
 								var tabs = '<li><a href="#' + item +'" data-toggle="tab">' + item + '</a></li>'
 								$('#effectTabs').append(tabs)
 								////console.log($('#effectTab'))
