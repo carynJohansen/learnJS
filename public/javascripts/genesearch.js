@@ -21,12 +21,12 @@ $(function () {
 			success: function(data) {
 				//console.log(data.data)
 				//console.log(data.gene)
-				if (data.data == 1) {
+				if (data.vcf == 1) {
 					alert('Gene not found. Check gene name.')
 					data.preventDefault()
 				}
-				$('#gene').append(data.gene)
-				var dataParsed = JSON.parse(data.data)
+				$('#gene').append(data.geneName)
+				var dataParsed = JSON.parse(data.vcf)
 				var scores = dataParsed[1].p_deleteriousScores.split(",")
 				var mutations = dataParsed[1].p_deleteriousMutations.split(",")
 				console.log(scores)

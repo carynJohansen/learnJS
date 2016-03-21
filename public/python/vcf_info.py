@@ -29,6 +29,18 @@ def parse_input( gene_str ):
 def get_vcf_reader():
 	return vcf.Reader(open('/Users/caryn/Dropbox/Project_RiceGeneticVariation/data/rice_chr2_3.vcf.gz', 'r'))
 
+def get_start_stop ( info_line ):
+#	if (type(info_line) == )
+	splitline = info_line[0].split('\t')
+	info = {
+		"chrom" : splitline[0],
+		"gene_id" : splitline[1],
+		"start" : int(splitline[3]),
+		"end" : int(splitline[4]),
+		"annotation" : splitline[9]
+	}
+	return info
+
 def get_MSU_info ( gene ):
 	chromNumber = parse_input(gene)
 	#print chromNumber
@@ -61,26 +73,11 @@ def get_MSU_info ( gene ):
 	#if there are no isoforms, return gene_info
 	return gene_info
 
-def get_start_stop ( info_line ):
-#	if (type(info_line) == )
-	splitline = info_line[0].split('\t')
-	info = {
-		"chrom" : splitline[0],
-		"gene_id" : splitline[1],
-		"start" : int(splitline[3]),
-		"end" : int(splitline[4]),
-		"annotation" : splitline[9]
-	}
-	return info
-
-
 def get_info_return_dict ( gene, info_dict ):
 	"""get the genotypes for each position for each sample"""
 	chrom = info_dict['chrom']
 	start = info_dict['start']
 	end = info_dict['end']
-
-	provean_list = get_PROVEAN_scores(gene)
 
 	vcf_R = get_vcf_reader()
 
@@ -98,32 +95,10 @@ def get_info_return_dict ( gene, info_dict ):
 				"genotype" : sample['GT'],
 				"SNPEFF_effect" : rec.INFO['SNPEFF_EFFECT'],
 				"SNPEFF_FUNCTIONAL_CLASS" : rec.INFO['SNPEFF_FUNCTIONAL_CLASS'],
-				"p_transcript_id" : provean_list[0],
-				"p_minimumScore" : provean_list[1],
-				"p_sumScore" : provean_list[2],
-				"p_deleteriousCount" : int(provean_list[3]),
-				"p_proteinLength" : int(provean_list[4]),
-				"p_proportionDeleterious" : provean_list[5],
-				"p_deleteriousMutations" : provean_list[6],
-				"p_deleteriousScores" : provean_list[7]
 			}
 			gene_records.append(rw)
 
 	gene_json = json.dumps(gene_records)
-	return gene_json
-
-def get_PROVEAN_scores (gene) :
-	provean = open(config.PROVEAN, 'r')
-	provean_info = []
-	myregex = r"(.*)" + re.escape(gene) + r"(.*)"
-	for line in provean:
-		if re.match(myregex, line):
-			provean_info.append(line)
-	provean_info = provean_info[0].split('\n')[0]
-	provean_list = provean_info.split('\t')
-
-	return provean_list
-
 
 
 ###############################
