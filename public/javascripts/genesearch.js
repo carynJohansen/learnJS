@@ -25,7 +25,15 @@ $(function () {
 					alert('Gene not found. Check gene name.')
 					data.preventDefault()
 				}
+				$('#gene').append(data.gene)
 				var dataParsed = JSON.parse(data.data)
+				var scores = dataParsed[1].p_deleteriousScores.split(",")
+				var mutations = dataParsed[1].p_deleteriousMutations.split(",")
+				console.log(scores)
+				$(scores).each(function (index, item) {
+					var row = '<tr><td>' + mutations[index] + '</td><td>' + scores[index] + '</td></tr>'
+					$('#proveanInfo').append(row)
+				})
 				//console.log("length of parsed JSON is", dataParsed.length)
 				var positions = _.keys(_.countBy(dataParsed, function (x) { return x.position}))
 				////console.log(positions)
@@ -33,7 +41,6 @@ $(function () {
 				////console.log(samples)
 				var effects = _.keys(_.countBy(dataParsed, function (x) { return x.SNPEFF_effect}))
 				////console.log(effects)
-				$('#gene').append(data.gene)
 				$('#sort_category').on('change', function() {
 					if (this.value == 'sample') {
 						$('#position').hide()
