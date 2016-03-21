@@ -29,7 +29,6 @@ $(function () {
 				var dataParsed = JSON.parse(data.data)
 				var scores = dataParsed[1].p_deleteriousScores.split(",")
 				var mutations = dataParsed[1].p_deleteriousMutations.split(",")
-
 				$(scores).each(function (index, item) {
 					var row = '<tr><td>' + mutations[index] + '</td><td>' + scores[index] + '</td></tr>'
 					$('#proveanInfo').append(row)
