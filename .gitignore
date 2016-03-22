@@ -44,9 +44,6 @@ jspm_packages
 # Data
 data
 
-# Custom Python 
-vcf
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
