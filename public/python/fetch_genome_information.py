@@ -9,11 +9,12 @@ import json
 import re
 import json
 
-#import config
-import vcf
-
 #import configuration script
 import config
+
+#import vcf module
+sys.path.append('/Users/caryn/Dropbox/Project_RiceGeneticVariation/database')
+import vcf
 
 #to time the program:
 import time

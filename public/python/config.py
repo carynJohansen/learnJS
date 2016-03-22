@@ -1,3 +1,7 @@
+# PYTHON IMPORTS
+
+vcf = '/Users/caryn/Dropbox/Project_RiceGeneticVariation/database/vcf'
+
 # dictionary for interpreting chromosome
 
 CHROM_DICT = {
