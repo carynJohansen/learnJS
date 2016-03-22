@@ -18,7 +18,8 @@ var _ = require('underscore')
 
 //Database connection
 var sqlite3 = require('sqlite3').verbose()
-var db = new sqlite3.Database('/Users/caryn/Dropbox/Project_RiceGeneticVariation/michael.db')
+var db = new sqlite3.Database('/Users/caryn/Dropbox/Project_jsLearn/simple_genes/michael.db')
+console.log(db)
 
 //port
 app.set('port', (process.env.PORT || 5000))
@@ -115,9 +116,38 @@ app.get('/searching', function (request, response) {
 }) // close searching
 
 app.get('/networksearch', function (request, response) {
+	console.log("you're in networksearch")
 	response.render('networksearch', {
 		title: 'Search Interaction Network'
 	})
+}) //close networksearch
+
+app.get('/querying', function (request, response) {
+	console.log("you're in /querying!")
+	function show (results) {
+		console.log(results)
+		response.send(results)
+	}
+
+	function testQuery (whenDone) {
+		db.serialize( function () {
+			var sql_query = "SELECT gm1.gene_locus as reg, net.regulator as netID_regulator, \
+			gm2.gene_locus as target, net.target as netID_target \
+			FROM interaction_network as net \
+			INNER JOIN gene_model as gm1 ON (net.regulator = gm1.id) \
+			INNER JOIN gene_model as gm2 ON (net.target = gm2.id) \
+			LIMIT 10"
+			console.log(sql_query)
+			db.all(sql_query, function(err, rows) {
+				if (err) {
+					console.log("ERROR!", err)
+				} else {
+					whenDone(rows)
+				}
+			}) // close db.all
+		})//close db.serialize
+	} // close testQuery function
+	testQuery(show)
 })
 
 app.get('/networkVis', function (request, response) {

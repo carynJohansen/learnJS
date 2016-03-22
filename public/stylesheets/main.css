@@ -52,8 +52,9 @@ div.main {
 	display: none;
 }
 
-/* ////////////// */
-/* Network Search */
+
+/* /////////////////// */
+/* Interaction Network */
 
 #textQuery {
 	width: 100%;
@@ -65,4 +66,15 @@ div.main {
 
 #specGeneClick {
 	display: none;
+}
+
+#testresults {
+	display: none;
+}
+
+#cy {
+  min-height: 200px;
+  max-height: 600px;
+  width: 80%;
+  position: relative;
 }

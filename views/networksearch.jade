@@ -31,6 +31,21 @@ block content
         br
         button#netClick I want to search the Interactions
 
+  .container
+    h4 Quick Query:
+    button#queryClick QUERY
+
+  .container#cy
+
+  .container#testresults
+    table.table
+        thead
+          tr
+            th Regulator
+            th Target
+        tbody#netTable
+
   script(src="js/underscore-min.js")
   script(src="js/bootstrap.min.js")
+  script(src="http://cytoscape.github.io/cytoscape.js/api/cytoscape.js-latest/cytoscape.min.js")
   script(src="javascripts/networksearch.js")

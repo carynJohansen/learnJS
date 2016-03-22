@@ -42,7 +42,6 @@ $(function () {
 								filteredJSON = dataParsed.filter(function (x, i) {
 									return x.sample == item
 								})//close json filter
-								//console.log("length of filtered JSON:", filteredJSON.length)
 								var drops = '<li><a href="#' + item + '" data-toggle="tab">' + item + '</a></li>'
 								$('#sampleTabs').append(drops)
 								var panel = '<div class="tab-pane fade" id="' + item + '">'
