@@ -4,26 +4,25 @@
 ///////////////////////////
 
 $(function () {
-	$('#netIn').keyup( function () {
-		$('#textQuery').val($(this).val())
-	})
-	$('#select').on('change', function() {
-		if (this.value == 'all_genes') {
-			$('#specGeneInput').hide()
-			$('#specGeneClick').hide()
-			$('#textQuery').val("SELECT * ")
-		} else if (this.value == 'specific_gene') {
-			$('#specGeneInput').show()
-			$('#specGeneClick').show()
-			$('#specGeneClick').on('click', function () {
-				var specGene = $('#specGeneInput').val()
-				console.log("you've clicked!", specGene)
-				$('#textQuery').val(specGene)
-			})
-		}
+//	$('#netIn').keyup( function () {
+//		$('#textQuery').val($(this).val())
+//	})
+//	$('#select').on('change', function() {
+//		if (this.value == 'all_genes') {
+//			$('#specGeneInput').hide()
+//			$('#specGeneClick').hide()
+//			$('#textQuery').val("SELECT * ")
+//		} else if (this.value == 'specific_gene') {
+//			$('#specGeneInput').show()
+//			$('#specGeneClick').show()
+//			$('#specGeneClick').on('click', function () {
+//				var specGene = $('#specGeneInput').val()
+//				console.log("you've clicked!", specGene)
+//				$('#textQuery').val(specGene)
+//			})
+//		}
+//	}) //close select change
 
-	}) //close select change
-	
 	$('#netClick').on('click', function () {
 		console.log("you clicked!")
 		var in_net = $('#netIn').val()
@@ -41,12 +40,17 @@ $(function () {
 	}) //close netClick function
 
 	$('#queryClick').on('click', function () {
+		var in_query = $('#textQuery').val()
 		$.ajax({
 			url: '/querying',
+			data : {
+				textQuery : in_query
+			},
 			success: function(data) {
 				//var dataParsed = JSON.parse(data)
 				//console.log(dataParsed)
 				$('#testresults').show()
+				$('#cy').show()
 				var nodeARR = []
 				var edgeARR = []
 				$(data).each(function (index, item) {
@@ -59,7 +63,13 @@ $(function () {
 				}) // close each
 				$('#cy').cytoscape({
 					layout: {
-						name: 'circle'
+						name: 'concentric',
+						concentric: function( node ){
+							return node.degree();
+						},
+						levelWidth: function( nodes ){
+							return 2;
+						}
 					},
 					style : [
 						{
@@ -80,6 +90,7 @@ $(function () {
 							style : {
 								'curve-style' : 'haystack',
 								'haystack-radius' : 0,
+								'target-arrow-shape' : 'triangle',
 								'width' : 5,
 								'opacity': 0.5,
 								'line-color' : '#EE9A00'
@@ -106,6 +117,8 @@ $(function () {
 						nodes: nodeARR,
 						edges : edgeARR
 					},
+					minZoom: 0.02,
+					maxZoom: 1,
 					ready: function(){
     					window.cy = this;
     					cy.elements().unselectify();
@@ -128,5 +141,4 @@ $(function () {
 			} // close success
 		}) // close ajax
 	}) //close on click
-
 }) // close initial function
