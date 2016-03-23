@@ -131,8 +131,8 @@ app.get('/querying', function (request, response) {
 
 	function testQuery (whenDone) {
 		db.serialize( function () {
-			var sql_query = request.query.textQuery
-			//var sql_query = "SELECT gm1.gene_locus as reg, net.regulator as netID_regulator, gm2.gene_locus as target, net.target as netID_target FROM interaction_network as net INNER JOIN gene_model as gm1 ON (net.regulator = gm1.id) INNER JOIN gene_model as gm2 ON (net.target = gm2.id) LIMIT 10"
+			//var sql_query = request.query.textQuery
+			var sql_query = "SELECT gm1.gene_locus as reg, net.regulator as netID_regulator, gm2.gene_locus as target, net.target as netID_target FROM interaction_network as net INNER JOIN gene_model as gm1 ON (net.regulator = gm1.id) INNER JOIN gene_model as gm2 ON (net.target = gm2.id) LIMIT 100"
 			console.log(sql_query)
 			db.all(sql_query, function(err, rows) {
 				if (err) {

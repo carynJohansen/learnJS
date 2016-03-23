@@ -63,13 +63,14 @@ $(function () {
 				}) // close each
 				$('#cy').cytoscape({
 					layout: {
-						name: 'concentric',
-						concentric: function( node ){
-							return node.degree();
-						},
-						levelWidth: function( nodes ){
-							return 2;
-						}
+//						name: 'concentric',
+//						concentric: function( node ){
+//							return node.degree();
+//						},
+//						levelWidth: function( nodes ){
+//							return 2;
+//						}
+						name : 'circle'
 					},
 					style : [
 						{
@@ -91,8 +92,8 @@ $(function () {
 								'curve-style' : 'haystack',
 								'haystack-radius' : 0,
 								'target-arrow-shape' : 'triangle',
-								'width' : 5,
-								'opacity': 0.5,
+								'width' : 10,
+								'opacity': 1,
 								'line-color' : '#EE9A00'
 							}
 						},
