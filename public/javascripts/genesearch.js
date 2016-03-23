@@ -27,6 +27,13 @@ $(function () {
 				}
 				$('#gene').append(data.gene)
 				var dataParsed = JSON.parse(data.data)
+				//show MSU annotations
+				var ann = dataParsed[1].annotation
+				var  start = dataParsed[1].start
+				var end = dataParsed[1].end
+				var list = '<li class="list-group-item"> Gene start: ' + start + '</li><li class="list-group-item">Gene end: ' + end + '</li><li class="list-group-item">Annotation: ' + ann + '</li></ul>'
+				$('#annotation').append(list)
+				//show PROVEAN results
 				var scores = dataParsed[1].p_deleteriousScores.split(",")
 				var mutations = dataParsed[1].p_deleteriousMutations.split(",")
 				$(scores).each(function (index, item) {

@@ -94,6 +94,8 @@ def get_info_return_dict ( gene, info_dict ):
 				"annotation" : info_dict['annotation'],
 				"chromosome" : rec.CHROM,
 				"position" : rec.POS,
+				"start" : info_dict['start'],
+				"end" : info_dict['end'],
 				"reference" : rec.REF,
 				"alternate" : str(rec.ALT[0]),
 				"genotype" : sample['GT'],
