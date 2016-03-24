@@ -5,5 +5,101 @@ block content
   .container
     .jumbotron
       h4 Query the regulatory interaction database
-  .container
+
+  .container.center-block
     h4 Compose a query statement:
+    .container
+      .row
+        .col-md-8
+          | Select
+          select#select
+            option(value='' selected disabled) select one
+            option(value='all_genes') all Genes
+            option(value='specific_gene') A specific gene
+          | that are
+          select#class
+            option(value='' selected disabled) select one
+            option(value='regulator') regulators
+            option(value='target') targets
+            option(value='either') either
+            option(value='both') both
+
+      input#specGeneInput(data-line='ajax', type='text', placeholder='gene locus...')
+
+    .container
+      .row#filterOptions
+        .col-md-4
+          | Select SNPEFF filter options:
+          .checkbox.customCheck
+            label
+              input(type='checkbox', value='START')
+              | Start
+          .checkbox
+            label
+              input(type='checkbox', value='STOP')
+              | Stop
+          .checkbox
+            label
+              input(type='checkbox', value='INTRON')
+              | Intron
+          .checkbox
+            label
+              input(type='checkbox', value='EXON')
+              | Exon
+          .checkbox
+            label
+              input(type='checkbox', value='NSC')
+              | Non-synonymous coding
+        .col-md-4
+          | Cultivar Filter Options
+          .checkbox
+            label
+              input(type='checkbox', value='japonica')
+              | Japinoca
+          .checkbox
+            label
+              input(type='checkbox', value='tropical_japonica')
+              | Tropical Japinoca
+          .checkbox
+            label
+              input(type='checkbox', value='indica')
+              | Indica
+          .checkbox
+            label
+              input(type='checkbox', value='aus')
+              | Aus
+        .col-md-4
+          | Select PROVEAN filter options
+          .checkbox
+            label
+              input(type='checkbox', value='delMut')
+              | Deleterious mutations
+
+    .container
+      button#createQuery Create Query
+
+    .container
+      .row
+        .col-sm-8
+          textarea#textQuery.form-control(data-link='ajax', rows='10')
+
+
+  .container
+    h4 Quick Query:
+    button#queryClick QUERY
+
+  .container#cy
+
+  .container#testresults
+    table.table
+        thead
+          tr
+            th Regulator
+            th Target
+        tbody#netTable
+
+  script(src="js/underscore-min.js")
+  script(src="js/bootstrap.min.js")
+  script(src="http://code.jquery.com/jquery-2.0.3.min.js")
+  script(src="http://cytoscape.github.io/cytoscape.js/api/cytoscape.js-latest/cytoscape.min.js")
+  script(src="javascripts/networksearch.js")

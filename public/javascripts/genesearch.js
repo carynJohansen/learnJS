@@ -64,7 +64,6 @@ $(function () {
 								filteredJSON = dataParsed.filter(function (x, i) {
 									return x.sample == item
 								})//close json filter
-								//console.log("length of filtered JSON:", filteredJSON.length)
 								var drops = '<li><a href="#' + item + '" data-toggle="tab">' + item + '</a></li>'
 								$('#sampleTabs').append(drops)
 								var panel = '<div class="tab-pane fade" id="' + item + '">'
@@ -148,6 +147,8 @@ $(function () {
 								var filteredJSON = dataParsed.filter(function (x, i) {
 									return x.SNPEFF_effect == item;
 								})
+								var positions_f = _.keys(_.countBy(dataParsed, function (x) { return x.position}))
+								//console.log("length of filtered JSON:", filteredJSON.length)
 								var tabs = '<li><a href="#' + item +'" data-toggle="tab">' + item + '</a></li>'
 								$('#effectTabs').append(tabs)
 								////console.log($('#effectTab'))

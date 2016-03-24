@@ -18,7 +18,8 @@ var _ = require('underscore')
 
 //Database connection
 var sqlite3 = require('sqlite3').verbose()
-var db = new sqlite3.Database('/Users/caryn/Dropbox/Project_RiceGeneticVariation/michael.db')
+var db = new sqlite3.Database('/Users/caryn/Dropbox/Project_jsLearn/simple_genes/michael.db')
+console.log(db)
 
 //port
 app.set('port', (process.env.PORT || 5000))
@@ -118,6 +119,34 @@ app.get('/networksearch', function (request, response) {
 	response.render('networksearch', {
 		title: 'Search Interaction Network'
 	})
+}) //close networksearch
+
+app.get('/querying', function (request, response) {
+	function show (results) {
+		response.send(results)
+	}
+
+	function testQuery (whenDone) {
+		db.serialize( function () {
+			//var sql_query = request.query.textQuery
+			var sql_query = "SELECT gm1.gene_locus as reg, net.regulator as netID_regulator, gm2.gene_locus as target, net.target as netID_target FROM interaction_network as net INNER JOIN gene_model as gm1 ON (net.regulator = gm1.id) INNER JOIN gene_model as gm2 ON (net.target = gm2.id) LIMIT 100"
+			console.log(sql_query)
+			db.all(sql_query, function(err, rows) {
+				if (err) {
+					console.log("ERROR!", err)
+				} else {
+					whenDone(rows)
+				}
+			}) // close db.all
+		})//close db.serialize
+	} // close testQuery function
+	testQuery(show)
+})
+
+app.get('/networkVis', function (request, response) {
+	var net_input = request.query.netInput
+	console.log("you're in networkVis:", net_input)
+	response.json(net_input)
 })
 
 app.post('/categorysearch', function (request, response) {

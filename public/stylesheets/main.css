@@ -32,29 +32,43 @@ div.main {
 
 /* Search Results */
 
-#sample {
+#sample, #position, #SNPEFF_effect, #test, #hide {
 	display: none;
 }
 
-#position {
+/* /////////////////// */
+/* Interaction Network */
+
+#select, #class {
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+#textQuery {
+	width: 100%;
+}
+
+#specGeneInput, #specGeneClick, #testresults {
 	display: none;
 }
 
-#SNPEFF_effect {
+#cy {
 	display: none;
+	outline: 1px solid #D3D3D3;
+	min-height: 400px;
+	max-height: 600px;
+	width: 80%;
+ 	position: relative;
 }
 
-#test {
-	display: none;
+/* ////////// */
+/* CheckBoxes */
+
+#filterOptions div.checkbox {
+	margin-top: 0px;
+	margin-bottom: 0px
 }
 
-#hide {
-	display: none;
+#filterOptions div.col-md-4 {
+	margin-top: 5px;
 }
-
-/* Tab Content 
-
-#sample .tab-content {
-	overflow: scroll;
-}
-*/
