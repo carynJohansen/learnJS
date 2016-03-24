@@ -116,16 +116,13 @@ app.get('/searching', function (request, response) {
 }) // close searching
 
 app.get('/networksearch', function (request, response) {
-	console.log("you're in networksearch")
 	response.render('networksearch', {
 		title: 'Search Interaction Network'
 	})
 }) //close networksearch
 
 app.get('/querying', function (request, response) {
-	console.log("you're in /querying!")
 	function show (results) {
-		console.log(results)
 		response.send(results)
 	}
 
