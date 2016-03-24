@@ -31,7 +31,7 @@ $(function () {
 				var ann = dataParsed[1].annotation
 				var  start = dataParsed[1].start
 				var end = dataParsed[1].end
-				var list = '<li class="list-group-item"> Gene start: ' + start + '</li><li class="list-group-item">Gene end: ' + end + '</li><li class="list-group-item">Annotation: ' + ann + '</li></ul>'
+				var list = '<li class="list-group-item"> Gene start: ' + start + '</li><li class="list-group-item">Gene end: ' + end + '</li><li class="list-group-item">Annotation: ' + ann + '</li><li class="list-group-item"><a href="http://rice.plantbiology.msu.edu/cgi-bin/ORF_infopage.cgi?orf=' + data.gene + '" target="_newtab"> MSU Gene Information Page </a></li></ul>'
 				$('#annotation').append(list)
 				//show PROVEAN results
 				var scores = dataParsed[1].p_deleteriousScores.split(",")
