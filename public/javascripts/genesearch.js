@@ -26,6 +26,7 @@ $(function () {
 					data.preventDefault()
 				}
 				$('#gene').append(data.gene)
+				//console.log(data.data)
 				var dataParsed = JSON.parse(data.data)
 				//show MSU annotations
 				var ann = dataParsed[1].annotation

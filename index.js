@@ -90,7 +90,7 @@ app.get('/searching', function (request, response) {
 		var geneval = request.query.geneInput
 		console.log('geneval in show():', geneval)
 		gene_vcf_search(geneval).then(function (geneJSON) {
-			console.log("length of python result here is:", geneJSON.length)
+			console.log("length of python result here is:", geneJSON[1])
 			response.send( {data : geneJSON, gene : geneval} )
 		}) // close promise
 	} //close show

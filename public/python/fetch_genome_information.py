@@ -83,7 +83,6 @@ def get_info_return_dict ( gene, info_dict ):
 	provean_list = get_PROVEAN_scores(gene)
 	if (provean_list == 1):
 		provean_list = ['NA'] * 8
-		print provean_list
 
 	vcf_R = get_vcf_reader()
 
