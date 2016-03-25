@@ -128,10 +128,7 @@ def get_PROVEAN_scores (gene) :
 		return 1
 	provean_info = provean_info[0].split('\n')[0]
 	provean_list = provean_info.split('\t')
-
 	return provean_list
-
-
 
 ###############################
 #            Main             #
