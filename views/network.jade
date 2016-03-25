@@ -6,7 +6,7 @@ block content
     .jumbotron
       h4 Query the regulatory interaction database
 
-  .container.center-block
+  .container#seachInput.center-block
     h4 Compose a query statement:
     .container
       .row
@@ -14,10 +14,10 @@ block content
           | Select
           select#select
             option(value='' selected disabled) select one
-            option(value='all_genes') all Genes
+            option(value='all_genes') all genes
             option(value='specific_gene') A specific gene
           | that are
-          select#class
+          select#category
             option(value='' selected disabled) select one
             option(value='regulator') regulators
             option(value='target') targets
@@ -30,52 +30,54 @@ block content
       .row#filterOptions
         .col-md-4
           | Select SNPEFF filter options:
-          .checkbox.customCheck
+          .checkbox
             label
-              input(type='checkbox', value='START')
+              input(type='checkbox', value='START', name='snpeff[]') 
               | Start
           .checkbox
             label
-              input(type='checkbox', value='STOP')
+              input(type='checkbox', value='STOP', name='snpeff[]')
               | Stop
           .checkbox
             label
-              input(type='checkbox', value='INTRON')
+              input(type='checkbox', value='INTRON', name='snpeff[]')
               | Intron
           .checkbox
             label
-              input(type='checkbox', value='EXON')
+              input(type='checkbox', value='EXON', name='snpeff[]')
               | Exon
           .checkbox
             label
-              input(type='checkbox', value='NSC')
+              input(type='checkbox', value='NSC', name='snpeff[]')
               | Non-synonymous coding
         .col-md-4
           | Cultivar Filter Options
           .checkbox
             label
-              input(type='checkbox', value='japonica')
+              input(type='checkbox', value='japonica', name='landrace[]')
               | Japinoca
           .checkbox
             label
-              input(type='checkbox', value='tropical_japonica')
+              input(type='checkbox', value='tropical_japonica', name='landrace[]')
               | Tropical Japinoca
           .checkbox
             label
-              input(type='checkbox', value='indica')
+              input(type='checkbox', value='indica', name='landrace[]')
               | Indica
           .checkbox
             label
-              input(type='checkbox', value='aus')
+              input(type='checkbox', value='aus', name='landrace[]')
               | Aus
         .col-md-4
           | Select PROVEAN filter options
           .checkbox
             label
-              input(type='checkbox', value='delMut')
+              input(type='checkbox', name='prov', value='delMut')
               | Deleterious mutations
 
     .container
+      // input#snpeff(type='hidden', name='snpeff[]')
+      // input#landrace(type='hidden', name='landrace[]')
       button#createQuery Create Query
 
     .container
@@ -102,4 +104,4 @@ block content
   script(src="js/bootstrap.min.js")
   script(src="http://code.jquery.com/jquery-2.0.3.min.js")
   script(src="http://cytoscape.github.io/cytoscape.js/api/cytoscape.js-latest/cytoscape.min.js")
-  script(src="javascripts/networksearch.js")
+  script(src="javascripts/network.js")
