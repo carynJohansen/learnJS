@@ -121,28 +121,28 @@ app.get('/network', function (request, response) {
 }) //close networksearch
 
 app.get('/querying', function (request, response) {
-	var queryJSON = request.query.inputJSON
-	console.log(queryJSON)
-	response.send(queryJSON)
-	function show (results) {
-		response.send(results)
+	function show () {
+		testQuery().then(function (queryJSON) {
+			console.log("this is in the promise testQuery:", queryJSON.length)
+			response.send(queryJSON)
+		})
 	}
 	function testQuery (whenDone) {
-		db.serialize( function () {
-			//var sql_query = request.query.textQuery
-			//console.log(sql_query)
-			var sql_query = "SELECT gm1.gene_locus as target, gm2.gene_locus as regulator FROM interaction_network as net INNER JOIN gene_model as gm1 on (net.target = gm1.id) INNER JOIN gene_model as gm2 ON (net.regulator = gm2.id)"
-			console.log(sql_query)
-			db.all(sql_query, function(err, rows) {
-				if (err) {
-					console.log("ERROR!", err)
-				} else {
-					whenDone(rows)
-				}
-			}) // close db.all
-		})//close db.serialize
+		return new Promise( function (fulfill, reject) {
+			var python = child.spawn('python', [__dirname + '/public/python/network_query.py'])
+			var data = ''
+			python.stdout.on('data', function (chunk) {
+				data += chunk
+			}) //close stdout
+			python.stderr.on('data', function (data) {
+				console.log('python error:', data)
+			})
+			python.stdout.on('end', function() {
+				fulfill(data)
+			})
+		}) //close new promise
 	} // close testQuery function
-	testQuery(show)
+	show()
 })
 
 app.get('/networkVis', function (request, response) {

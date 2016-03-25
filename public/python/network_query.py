@@ -22,19 +22,18 @@ import time
 
 engine = create_engine('sqlite:////Users/caryn/Dropbox/Project_jsLearn/simple_genes/michael.db')
 connect = engine.connect().connection
-print connect
 
 ###############################
 #          Methods            #
 
 def sql_query():
 	"""this returns a pandas data frame"""
-	sql_st = '''SELECT gm1.gene_locus as regulator,  \
-					gm2.gene_locus as target \
+	sql_st = '''SELECT gm1.gene_locus as regulator, net.regulator as netID_regulator, \
+                    gm2.gene_locus as target, net.target as netID_target \
 					FROM interaction_network as net \
 					INNER JOIN gene_model as gm1 ON (net.regulator = gm1.id) \
 					INNER JOIN gene_model as gm2 ON (net.target = gm2.id) \
-					WHERE net.regulator = 32039 LIMIT 10'''
+					LIMIT 50'''
 	data = sql.read_sql(sql_st, con=connect)
 	return data
 
@@ -146,7 +145,9 @@ def create_json (sql_result) :
 		#print target
 		interaction = {
 			"regulator" : regulator,
-			"target" : target
+			"netID_regulator" : row['netID_regulator'],
+			"target" : target,
+			"netID_target" : row['netID_target']
 		}
 		#regulator stuff
 		reg = json_by_gene(regulator)
@@ -154,7 +155,8 @@ def create_json (sql_result) :
 		interaction["regulator_info"] = reg
 		interaction["target_info"] = targ
 		results.append(interaction)
-	return results
+	res_json = json.dumps(results)
+	return res_json
 
 
 
