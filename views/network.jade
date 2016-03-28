@@ -24,9 +24,20 @@ block content
             option(value='either') either
             option(value='both') both
 
+      | add a radia that has a choice for either the interactions or just the gene list.
+
       input#specGeneInput(data-line='ajax', type='text', placeholder='gene locus...')
 
     .container
+      br
+      button#createQuery Create Query
+    br
+    .container
+      .row
+        textarea#textQuery.form-control(data-link='ajax', rows='10')
+
+    .container
+      h4 Filter Options:
       .row#filterOptions
         .col-md-4
           | Select SNPEFF filter options:
@@ -74,16 +85,6 @@ block content
             label
               input(type='checkbox', name='prov', value='delMut')
               | Deleterious mutations
-
-    .container
-      // input#snpeff(type='hidden', name='snpeff[]')
-      // input#landrace(type='hidden', name='landrace[]')
-      button#createQuery Create Query
-
-    .container
-      .row
-        .col-sm-8
-          textarea#textQuery.form-control(data-link='ajax', rows='10')
 
   .container
     h4 Quick Query:

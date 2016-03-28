@@ -35,6 +35,7 @@ def sql_query():
 					INNER JOIN gene_model as gm2 ON (net.target = gm2.id) \
 					LIMIT 50'''
 	data = sql.read_sql(sql_st, con=connect)
+	#need an error catch here
 	return data
 
 #get the MSU data for each of the targets
@@ -133,8 +134,6 @@ def json_by_gene ( gene ):
 			"provean_mutations" : provean[6]
 		}
 	return results
-
-
 
 def create_json (sql_result) :
 	results = []

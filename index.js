@@ -90,7 +90,6 @@ app.get('/searching', function (request, response) {
 		var geneval = request.query.geneInput
 		console.log('geneval in show():', geneval)
 		gene_vcf_search(geneval).then(function (geneJSON) {
-			console.log("length of python result here is:", geneJSON[1])
 			response.send( {data : geneJSON, gene : geneval} )
 		}) // close promise
 	} //close show
@@ -119,6 +118,10 @@ app.get('/network', function (request, response) {
 		title: 'Search Interaction Network'
 	})
 }) //close networksearch
+
+app.get('/createquery', function (request, response) {
+	
+})
 
 app.get('/querying', function (request, response) {
 	function show () {
