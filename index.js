@@ -120,7 +120,9 @@ app.get('/network', function (request, response) {
 }) //close networksearch
 
 app.get('/createquery', function (request, response) {
-	
+	var queryJSON = request.query.inputJSON
+	console.log(queryJSON)
+	response.send(queryJSON)
 })
 
 app.get('/querying', function (request, response) {

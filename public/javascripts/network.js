@@ -7,7 +7,7 @@ $(function () {
 //	$('#netIn').keyup( function () {
 //		$('#textQuery').val($(this).val())
 //	})
-	$('#select').on('change', function() {
+	$('#geneSelectInput').on('change', function() {
 		if (this.value == 'all_genes') {
 			$('#specGeneInput').hide()
 		} else if (this.value == 'specific_gene') {
@@ -32,48 +32,46 @@ $(function () {
 	
 	$('#createQuery').on('click', function () {
 		var select = $('#select').val()
-		if (select == null) {
-			alert("Please choose a select option from the dropdown.")
-		}
+		var geneSelectInput = $('#geneSelectInput').val()
 		var category = $('#category').val()
-		if (category == null ) {
-			alert("Please select a network category from the dropdown.")
+		if (select == null || geneSelectInput == null || category == null ) {
+			alert("Please complete dropdown options.")
 		}
-		var snp_arr = []
-		var lr_arr = []
-		$('input[name="snpeff[]"]:checked').each(function() {
-			snp_arr.push($(this).val())
-		})
-		console.log(snp_arr)
-		$('input:checked[name="landrace[]"]').each( function () {
-			lr_arr.push($(this).val());
-		})
+//		var snp_arr = []
+//		var lr_arr = []
+//		$('input[name="snpeff[]"]:checked').each(function() {
+//			snp_arr.push($(this).val())
+//		})
+//		console.log(snp_arr)
+//		$('input:checked[name="landrace[]"]').each( function () {
+//			lr_arr.push($(this).val());
+//		})
 		//var prov = $('input:checked[name="prov"]').val()
 		//console.log(prov)
 
-		var querySTR = '{'
-			+ '"select" : "' + select + '",'
-			+ '"category" : "' + category + '", "snpeff" : ['
-		$(snp_arr).each(function (index, item) {
-			if (index == 0) {
-				querySTR = querySTR.concat('"' + item + '"')
-			} else {
-				querySTR = querySTR.concat(',"' + item + '"')
-			}
-		})
-		querySTR = querySTR.concat('], "landrace" : [')
-		$(lr_arr).each(function (index, item) {
-			if (index == 0) {
-				querySTR = querySTR.concat('"' + item + '"')
-			} else {
-				querySTR = querySTR.concat(',"' + item + '"')
-			}
-		})
-		querySTR = querySTR.concat(']}')
+		var querySTR = '{ "select" : "' + select + '", "geneSelectInput" : "' + geneSelectInput + '", "category" : "' + category + '"}'
+		//' "snpeff" : ['
+//		$(snp_arr).each(function (index, item) {
+//			if (index == 0) {
+//				querySTR = querySTR.concat('"' + item + '"')
+//			} else {
+//				querySTR = querySTR.concat(',"' + item + '"')
+//			}
+//		})
+//		querySTR = querySTR.concat('], "landrace" : [')
+//		$(lr_arr).each(function (index, item) {
+//			if (index == 0) {
+//				querySTR = querySTR.concat('"' + item + '"')
+//			} else {
+//				querySTR = querySTR.concat(',"' + item + '"')
+//			}
+//		})
+//		querySTR = querySTR.concat(']}')
 		console.log(querySTR)
 		var queryJSON = JSON.parse(querySTR)
+		console.log(queryJSON)
 		$.ajax({
-			url : '/querying',
+			url : '/createquery',
 			data : {
 				inputJSON : queryJSON
 			},
@@ -81,10 +79,11 @@ $(function () {
 				console.log('ay!')
 				$('#textQuery').val(data)
 			}
-		})
-	})
+		}) //close ajax
+	}) //close click createQuery
 
 	$('#queryClick').on('click', function () {
+		console.log("this is a test.", geneSelectInput)
 		var in_query = $('#textQuery').val()
 		$.ajax({
 			url: '/querying',
