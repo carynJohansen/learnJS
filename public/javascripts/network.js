@@ -60,15 +60,16 @@ $(function () {
 							$('#cy').show()
 							var nodeARR = []
 							var edgeARR = []
+							var table = ''
 							$(json).each(function (index, item) {
 								console.log(item)
 								//var nodej = '{data : { id : ' + item.netID_regulator + ', name : ' + item.reg +'}}'
 								nodeARR.push({data : { id : item.netID_regulator , name : item.regulator }})
 								nodeARR.push({data : { id : item.netID_target, name : item.target }})
 								edgeARR.push({data : {source: item.netID_regulator , target: item.netID_target }})
-								var row = '<tr><td>' + item.regulator + '</td><td>' + item.target + '</td><td>' + item.regulator_info.provean_mutations + '</td><td>'+ item.target_info.provean_mutations + '</td></tr>'
-								$('#netTable').append(row)
+								table += '<tr><td>' + item.regulator + '</td><td>' + item.target + '</td><td>' + item.regulator_info.provean_mutations + '</td><td>'+ item.target_info.provean_mutations + '</td></tr>'
 							}) // close each
+							$('#netTable').html(table)
 							$('#cy').cytoscape({
 								layout: {
 									name : 'cose-bilkent'
