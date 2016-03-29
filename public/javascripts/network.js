@@ -58,16 +58,19 @@ $(function () {
 							console.log(json)
 							$('#testresults').show()
 							$('#cy').show()
+							var nodes = json.group == "nodes"
+							console.log(nodes.length)
 							var nodeARR = []
 							var edgeARR = []
 							var table = ''
 							$(json).each(function (index, item) {
 								console.log(item)
 								//var nodej = '{data : { id : ' + item.netID_regulator + ', name : ' + item.reg +'}}'
-								nodeARR.push({data : { id : item.netID_regulator , name : item.regulator }})
-								nodeARR.push({data : { id : item.netID_target, name : item.target }})
-								edgeARR.push({data : {source: item.netID_regulator , target: item.netID_target }})
+								nodeARR.push({data : { id : item.netID_regulator , name : item.regulator, muts : item.regulator_info.provean_mutations }, group:"nodes",removed:false,selected:false,selectable:true,locked:false,grabbed:false,grabbable:true})
+								nodeARR.push({data : { id : item.netID_target, name : item.target, muts : item.target_info.provean_mutations }, group:"nodes",removed:false,selected:false,selectable:true,locked:false,grabbed:false,grabbable:true})
+								edgeARR.push({data : {source: item.netID_regulator , target: item.netID_target }, group:"edges",removed:false,selected:false,selectable:true,locked:false,grabbed:false,grabbable:true})
 								table += '<tr><td>' + item.regulator + '</td><td>' + item.target + '</td><td>' + item.regulator_info.provean_mutations + '</td><td>'+ item.target_info.provean_mutations + '</td></tr>'
+					
 							}) // close each
 							$('#netTable').html(table)
 							$('#cy').cytoscape({

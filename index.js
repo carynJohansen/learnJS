@@ -125,7 +125,6 @@ app.get('/createquery', function (request, response) {
 		var queryJSON = request.query.inputJSON
 		console.log(queryJSON)
 		create_query(queryJSON).then(function (queryStm) {
-			console.log(queryStm)
 			response.send(queryStm)
 		}) // close promise
 	} // close return query
@@ -152,7 +151,7 @@ app.get('/createquery', function (request, response) {
 app.get('/querying', function (request, response) {
 	function show () {
 		testQuery().then(function (queryJSON) {
-			console.log("this is in the promise testQuery:", queryJSON.length)
+			console.log(queryJSON)
 			response.send(queryJSON)
 		})
 	}
