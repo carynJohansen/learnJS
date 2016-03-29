@@ -43,54 +43,63 @@ block content
         textarea#textQuery.form-control(data-link='ajax', rows='10')
 
     .container
-      h4 Filter Options:
+      h4 Network Display Options
       .row#filterOptions
-        .col-md-4
-          | Select SNPEFF filter options:
-          .checkbox
-            label
-              input(type='checkbox', value='START', name='snpeff[]') 
-              | Start
-          .checkbox
-            label
-              input(type='checkbox', value='STOP', name='snpeff[]')
-              | Stop
-          .checkbox
-            label
-              input(type='checkbox', value='INTRON', name='snpeff[]')
-              | Intron
-          .checkbox
-            label
-              input(type='checkbox', value='EXON', name='snpeff[]')
-              | Exon
-          .checkbox
-            label
-              input(type='checkbox', value='NSC', name='snpeff[]')
-              | Non-synonymous coding
-        .col-md-4
-          | Cultivar Filter Options
-          .checkbox
-            label
-              input(type='checkbox', value='japonica', name='landrace[]')
-              | Japinoca
-          .checkbox
-            label
-              input(type='checkbox', value='tropical_japonica', name='landrace[]')
-              | Tropical Japinoca
-          .checkbox
-            label
-              input(type='checkbox', value='indica', name='landrace[]')
-              | Indica
-          .checkbox
-            label
-              input(type='checkbox', value='aus', name='landrace[]')
-              | Aus
-        .col-md-4
-          | Select PROVEAN filter options
-          .checkbox
-            label
-              input(type='checkbox', name='prov', value='delMut')
-              | Deleterious mutations
+        .darkBG.col-md-4
+          .panel.panel-default
+            .panel-heading
+              | Show network results with checked SNPEFF effects:
+            .panel-body
+              .checkbox
+                label
+                  input(type='checkbox', value='START', name='snpeff[]') 
+                  | Start
+              .checkbox
+                label
+                  input(type='checkbox', value='STOP', name='snpeff[]')
+                  | Stop
+              .checkbox
+                label
+                  input(type='checkbox', value='INTRON', name='snpeff[]')
+                  | Intron
+              .checkbox
+                label
+                  input(type='checkbox', value='EXON', name='snpeff[]')
+                  | Exon
+              .checkbox
+                label
+                  input(type='checkbox', value='NSC', name='snpeff[]')
+                  | Non-synonymous coding
+        .darkBG.col-md-4
+          .panel.panel-default
+            .panel-heading
+              | Cultivar Filter Options:
+            .panel-body
+              .checkbox
+                label
+                  input(type='checkbox', value='japonica', name='landrace[]')
+                  | Japinoca
+              .checkbox
+                label
+                  input(type='checkbox', value='tropical_japonica', name='landrace[]')
+                  | Tropical Japinoca
+              .checkbox
+                label
+                  input(type='checkbox', value='indica', name='landrace[]')
+                  | Indica
+              .checkbox
+                label
+                  input(type='checkbox', value='aus', name='landrace[]')
+                  | Aus
+        .darkerBG.col-md-4
+          .panel.panel-default
+            .panel-heading
+              | Select PROVEAN filter options
+            .panel-body
+              .checkbox
+                label
+                  input(type='checkbox', name='prov', value='delMut')
+                  | Deleterious mutations
 
   .container
     button#queryClick QUERY

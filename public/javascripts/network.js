@@ -42,8 +42,9 @@ $(function () {
 				console.log(data)
 				$('#textQuery').val(data)
 
+
+
 				$('#queryClick').on('click', function () {
-					console.log("this is a test.", geneSelectInput)
 					var in_query = $('#textQuery').val()
 					$.ajax({
 						url: '/querying',
