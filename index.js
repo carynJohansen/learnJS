@@ -120,10 +120,34 @@ app.get('/network', function (request, response) {
 }) //close networksearch
 
 app.get('/createquery', function (request, response) {
-	var queryJSON = request.query.inputJSON
-	console.log(queryJSON)
-	response.send(queryJSON)
-})
+	
+	function return_query() {
+		var queryJSON = request.query.inputJSON
+		console.log(queryJSON)
+		create_query(queryJSON).then(function (queryStm) {
+			console.log(queryStm)
+			response.send(queryStm)
+		}) // close promise
+	} // close return query
+
+	function create_query ( jsonInfo ) {
+		return new Promise( function (fulfill, reject) {
+			var python = child.spawn('python', [__dirname + '/public/python/create_query.py', jsonInfo ])
+			var data = ''
+			python.stdout.on('data', function (chunk) {
+				data += chunk
+			}) //close stdout
+			python.stderr.on('data', function (data) {
+				console.log('python err: ' + data)
+				response.end('python error in allele counts!' + data)
+			}) //close stderr
+			python.stdout.on('end', function() {
+				fulfill(data)
+			})
+		}) // close new Promise
+	} // close create_query
+	return_query()
+}) //close createquery
 
 app.get('/querying', function (request, response) {
 	function show () {
@@ -132,9 +156,11 @@ app.get('/querying', function (request, response) {
 			response.send(queryJSON)
 		})
 	}
-	function testQuery (whenDone) {
+	function testQuery () {
 		return new Promise( function (fulfill, reject) {
-			var python = child.spawn('python', [__dirname + '/public/python/network_query.py'])
+			var inquery = request.query.textQuery
+			console.log(inquery)
+			var python = child.spawn('python', [__dirname + '/public/python/network_query.py', inquery])
 			var data = ''
 			python.stdout.on('data', function (chunk) {
 				data += chunk

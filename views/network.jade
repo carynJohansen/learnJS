@@ -21,7 +21,7 @@ block content
             option(value='' selected disabled) select one
             option(value='all_genes') all genes
             option(value='specific_gene') a specific gene
-            option(value='gene_list') a list of genes
+            option(value='gene_list' disabled) a list of genes
           | that is/are
           select#category
             option(value='' selected disabled) select one
@@ -93,7 +93,6 @@ block content
               | Deleterious mutations
 
   .container
-    h4 Quick Query:
     button#queryClick QUERY
 
   .container#cy

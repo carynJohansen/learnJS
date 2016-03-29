@@ -26,15 +26,9 @@ connect = engine.connect().connection
 ###############################
 #          Methods            #
 
-def sql_query():
+def sql_query( inquery ):
 	"""this returns a pandas data frame"""
-	sql_st = '''SELECT gm1.gene_locus as regulator, net.regulator as netID_regulator, \
-                    gm2.gene_locus as target, net.target as netID_target \
-					FROM interaction_network as net \
-					INNER JOIN gene_model as gm1 ON (net.regulator = gm1.id) \
-					INNER JOIN gene_model as gm2 ON (net.target = gm2.id) \
-					LIMIT 50'''
-	data = sql.read_sql(sql_st, con=connect)
+	data = sql.read_sql(inquery, con=connect)
 	#need an error catch here
 	return data
 
@@ -164,7 +158,8 @@ def create_json (sql_result) :
 
 if __name__ == '__main__':
 	#file, json = sys.argv
-	sql_res = sql_query()
+	indict = sys.argv[1]
+	sql_res = sql_query(indict)
 	final = create_json(sql_res)
 	print final
 
