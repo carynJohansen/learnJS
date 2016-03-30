@@ -12,7 +12,10 @@ import re
 import ast
 
 import config
-#import vcf
+
+#import vcf module
+sys.path.append('/Users/caryn/Dropbox/Project_RiceGeneticVariation/database')
+import vcf
 
 #to time the program:
 import time
@@ -25,6 +28,40 @@ connect = engine.connect().connection
 
 ###############################
 #          Methods            #
+
+#retrieve VCF information
+def get_vcf_reader():
+	return vcf.Reader(open(config.VCF, 'r'))
+
+def get_VCF_info( gene, msu_info ):
+	chrom = msu_info[0]
+	start = int(msu_info[3])
+	end = int(msu_info[4])
+
+	vcf_reader = get_vcf_reader()
+
+	snpeff_effects = []
+	positions = []
+	for rec in vcf_reader.fetch(chrom, start, end):
+		snpeff_effects.append(rec.INFO['SNPEFF_EFFECT'])
+		positions.append(rec.POS)
+#		rw = {
+#			"gene" : gene,
+#			"chromosome" : rec.CHROM,
+#			"position" : rec.POS,
+#			"start" : start,
+#			"end" : end,
+#			"reference" : rec.REF,
+#			"alternate" : str(rec.ALT[0]),
+#			"SNPEFF_effect" : rec.INFO['SNPEFF_EFFECT'],
+#			"SNPEFF_FUNCTIONAL_CLASS" : rec.INFO['SNPEFF_FUNCTIONAL_CLASS']
+#		}
+	vcf_records = {"snpeff" : snpeff_effects, "positions" : positions}
+	#print vcf_records
+	return vcf_records
+
+
+#get sql results
 
 def sql_query( inquery ):
 	"""this returns a pandas data frame"""
@@ -40,7 +77,6 @@ def parse_input( gene_str ):
 
 def get_MSU_info ( gene ):
 	chromNumber = parse_input(gene)
-	#print chromNumber
 	infoFile = config.CHROM_INFO_PATH[chromNumber]
 	info = open(infoFile, 'r')
 	gene_info = []
@@ -72,17 +108,6 @@ def get_MSU_info ( gene ):
 	gene_info = gene_info[0].split('\t')
 	return gene_info
 
-def get_start_stop ( info_line ):
-	splitline = info_line[0].split('\t')
-	info = {
-		"chrom" : splitline[0],
-		"gene_id" : splitline[1],
-		"start" : int(splitline[3]),
-		"end" : int(splitline[4]),
-		"annotation" : splitline[9]
-	}
-	return info
-
 #Get the Provean prediction 
 def get_PROVEAN_scores (gene) :
 	provean = open(config.PROVEAN, 'r')
@@ -105,6 +130,19 @@ def json_by_gene ( gene ):
 
 	#get provean info, this is a list
 	provean = get_PROVEAN_scores(gene)
+
+	#get VCF info
+	if (msu[0] == 'Chr2' or msu[0] == 'Chr3'):
+		vcf_info = get_VCF_info(gene, msu)
+		snpeff = vcf_info['snpeff']
+		snpeff_u = list(set(snpeff))
+		positions = vcf_info['positions']
+	else :
+		snpeff = "no current VCF information"
+		snpeff_u = "no current VCF information"
+		positions = "no current VCF information"
+
+	#options for provean outputs
 	if (provean == 1) :
 		results = {
 			"gene_id" : gene,
@@ -114,7 +152,10 @@ def json_by_gene ( gene ):
 			"end" : msu[4],
 			"annotation" : msu[9],
 			"provean_delscores" : "gene not found",
-			"provean_mutations" : "gene not found"
+			"provean_mutations" : "gene not found",
+			"snpeff" : snpeff,
+			"snpeff_unique" : snpeff_u,
+			"variant_positions" : positions
 		}
 	else:
 		results = {
@@ -125,7 +166,10 @@ def json_by_gene ( gene ):
 			"end" : msu[4],
 			"annotation" : msu[9],
 			"provean_delscores" : provean[7],
-			"provean_mutations" : provean[6]
+			"provean_mutations" : provean[6],
+			"snpeff" : snpeff,
+			"snpeff_unique" : snpeff_u,
+			"variant_positions" : positions
 		}
 	return results
 

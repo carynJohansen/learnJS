@@ -103,18 +103,24 @@ block content
 
   .container
     button#queryClick QUERY
+  br
 
-  .container#cy
+  .container
+    .col-md-12#cy
 
   .container#testresults
-    table.table
-        thead
-          tr
-            th Regulator
-            th Target
-            th Regulator Provean Mutations
-            th Target Provean Mutations
-        tbody#netTable
+    .row
+      .col-md-12
+        table.table
+            thead
+              tr
+                th Regulator
+                th Regulator Provean Mutations
+                th Regulator SNPEFF predictions
+                th Target
+                th Target Provean Mutations
+                th Target SNPEFF predictions
+            tbody#netTable
 
   script(src="js/underscore-min.js")
   script(src="js/bootstrap.min.js")
