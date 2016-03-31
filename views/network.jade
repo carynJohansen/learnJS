@@ -52,24 +52,65 @@ block content
             .panel-body
               .checkbox
                 label
-                  input(type='checkbox', value='START', name='snpeff[]') 
-                  | Start
+                  input(type='checkbox', value='CDS', name='snpeff[]')
+                  | Coding sequence variant
               .checkbox
                 label
-                  input(type='checkbox', value='STOP', name='snpeff[]')
-                  | Stop
+                  input(type='checkbox', value='START_GAINED', name='snpeff[]') 
+                  | Start gained
+              .checkbox
+                label
+                  input(type='checkbox', value='START_LOST', name='snpeff[]') 
+                  | Start lost
+              .checkbox
+                label
+                  input(type='checkbox', value='STOP_GAINED', name='snpeff[]')
+                  | Stop gained
+              .checkbox
+                label
+                  input(type='checkbox', value='STOP_LOST', name='snpeff[]')
+                  | Stop lost
+              .checkbox
+                label
+                  input(type='checkbox', value='FRAME_SHIFT', name='snpeff[]')
+                  | Frame shift variant
               .checkbox
                 label
                   input(type='checkbox', value='INTRON', name='snpeff[]')
-                  | Intron
+                  | Intron variant
               .checkbox
                 label
                   input(type='checkbox', value='EXON', name='snpeff[]')
-                  | Exon
+                  | Exon variant
               .checkbox
                 label
                   input(type='checkbox', value='NSC', name='snpeff[]')
                   | Non-synonymous coding
+              .checkbox
+                label
+                  input(type='checkbox', value='DOWNSTREAM', name='snpeff[]')
+                  | Downstream gene variant
+              .checkbox
+                label
+                  input(type='checkbox', value='GENE', name='snpeff[]')
+                  | gene variant
+              .checkbox
+                label
+                  input(type='checkbox', value='NON_SYNONYMOUS_START', name='snpeff[]')
+                  | Missense variant
+              .checkbox
+                label
+                  input(type='checkbox', value='UPSTREAM', name='snpeff[]')
+                  | Upstream of gene variant
+              .checkbox
+                label
+                  input(type='checkbox', value='UTR_3_PRIME', name='snpeff[]')
+                  | 3' UTR variant
+              .checkbox
+                label
+                  input(type='checkbox', value='UTR_5_PRIME', name='snpeff[]')
+                  | 5' UTR variant
+              
         .darkBG.col-md-4
           .panel.panel-default
             .panel-heading
