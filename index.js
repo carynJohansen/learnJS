@@ -151,14 +151,14 @@ app.get('/createquery', function (request, response) {
 app.get('/querying', function (request, response) {
 	function show () {
 		testQuery().then(function (queryJSON) {
-			console.log(queryJSON)
+			console.log("in the show() step of querying!")
 			response.send(queryJSON)
 		})
 	}
 	function testQuery () {
 		return new Promise( function (fulfill, reject) {
 			var inquery = request.query.textQuery
-			console.log(inquery)
+			console.log("and here we query the network in python...", inquery)
 			var python = child.spawn('python', [__dirname + '/public/python/network_query.py', inquery])
 			var data = ''
 			python.stdout.on('data', function (chunk) {
