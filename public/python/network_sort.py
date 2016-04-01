@@ -18,14 +18,14 @@ import time
 ###################
 #    SQL Engine   #
 
-engine = create_engine('sqlite:////Users/caryn/Dropbox/Project_jsLearn/simple_genes/michael.db')
+engine = create_engine('sqlite:///' + config.DATABASE)
 connect = engine.connect().connection
 
 ###############################
 #          Methods            #
 
 def get_vcf_reader():
-	return vcf.Reader(open('/Users/caryn/Dropbox/Project_RiceGeneticVariation/data/rice_chr2_3.vcf.gz', 'r'))
+	return vcf.Reader(open(config.VCF, 'r'))
 
 def parse_input( gene_str ):
 	g_split = gene_str.split('g')[0]

@@ -23,7 +23,7 @@ import time
 ###################
 #    SQL Engine   #
 
-engine = create_engine('sqlite:////Users/caryn/Dropbox/Project_jsLearn/simple_genes/michael.db')
+engine = create_engine('sqlite:///' + config.DATABASE)
 connect = engine.connect().connection
 
 ###############################
@@ -194,8 +194,6 @@ def create_json (sql_result) :
 		results.append(interaction)
 	res_json = json.dumps(results)
 	return res_json
-
-
 
 ###############################
 #            Main             #

@@ -4,6 +4,8 @@ pyvcf = '/Users/caryn/Dropbox/Project_RiceGeneticVariation/database/vcf'
 
 VCF='/Users/caryn/Dropbox/Project_RiceGeneticVariation/data/rice_chr2_3.vcf.gz'
 
+DATABASE='/Users/caryn/Dropbox/Project_RiceGeneticVariation/michael_03312016.db'
+
 # dictionary for interpreting chromosome
 
 CHROM_DICT = {
