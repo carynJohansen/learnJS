@@ -8,6 +8,12 @@ div.main {
 	margin: 10%;
 }
 
+#footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background: #d3d3d3;
+}
 /* make row-fluid scroll horizontally */
 
 #sampleTabs .nav.nav-tabs {
@@ -32,29 +38,48 @@ div.main {
 
 /* Search Results */
 
-#sample {
+#sample, #position, #SNPEFF_effect, #test, #hide {
 	display: none;
 }
 
-#position {
+/* /////////////////// */
+/* Interaction Network */
+
+#select, #class {
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+#textQuery {
+	width: 100%;
+}
+
+#specGeneInput, #specGeneClick, #testresults {
 	display: none;
 }
 
-#SNPEFF_effect {
+#cy {
 	display: none;
+	outline: 1px solid #D3D3D3;
+	min-height: 400px;
+	max-height: 900px;
+	width: 100%;
+ 	position: relative;
 }
 
-#test {
-	display: none;
+.table {
+	table-layout: fixed;
+	word-wrap: break-word;
 }
 
-#hide {
-	display: none;
+/* ////////// */
+/* CheckBoxes */
+
+#filterOptions div.checkbox {
+	margin-top: 0px;
+	margin-bottom: 0px
 }
 
-/* Tab Content 
-
-#sample .tab-content {
-	overflow: scroll;
+#filterOptions div.col-md-4 {
+	margin-top: 5px;
 }
-*/

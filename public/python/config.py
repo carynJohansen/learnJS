@@ -1,6 +1,10 @@
 # PYTHON IMPORTS
 
-vcf = '/Users/caryn/Dropbox/Project_RiceGeneticVariation/database/vcf'
+pyvcf = '/Users/caryn/Dropbox/Project_RiceGeneticVariation/database/vcf'
+
+VCF='/Users/caryn/Dropbox/Project_RiceGeneticVariation/data/rice_chr2_3.vcf.gz'
+
+DATABASE='/Users/caryn/Dropbox/Project_RiceGeneticVariation/michael_04042016.db'
 
 # dictionary for interpreting chromosome
 

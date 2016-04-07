@@ -26,7 +26,20 @@ $(function () {
 					data.preventDefault()
 				}
 				$('#gene').append(data.gene)
+				//console.log(data.data)
 				var dataParsed = JSON.parse(data.data)
+				//show MSU annotations
+				var ann = dataParsed[1].annotation
+				var  start = dataParsed[1].start
+				var end = dataParsed[1].end
+				var list1 = '<li class="list-group-item"> Gene start: ' + start + '</li><li class="list-group-item">Gene end: ' + end + '</li><li class="list-group-item">Annotation: ' + ann + '</li></ul>'
+				$('#annotation').append(list1)
+				//show links
+				var links = '<li class="list-group-item"><a href="http://rice.plantbiology.msu.edu/cgi-bin/ORF_infopage.cgi?orf=' + data.gene + '" target="_newtab"> MSU Gene Information Page </a></li>'
+				links = links.concat('<li class="list-group-item"><a href="http://rice.plantbiology.msu.edu/cgi-bin/gbrowse/rice/?name=' + data.gene + '" target="_newtab"> MSU Genome Browser </a></li>')
+				links = links.concat('<li class="list-group-item"><a href="http://www.uniprot.org/uniprot/?query=' + data.gene + '&sort=score" target="_newtab"> Search UniProt </a></li></ul>')
+				$('#links').append(links)
+				//show PROVEAN results
 				var scores = dataParsed[1].p_deleteriousScores.split(",")
 				var mutations = dataParsed[1].p_deleteriousMutations.split(",")
 				$(scores).each(function (index, item) {
@@ -52,7 +65,6 @@ $(function () {
 								filteredJSON = dataParsed.filter(function (x, i) {
 									return x.sample == item
 								})//close json filter
-								//console.log("length of filtered JSON:", filteredJSON.length)
 								var drops = '<li><a href="#' + item + '" data-toggle="tab">' + item + '</a></li>'
 								$('#sampleTabs').append(drops)
 								var panel = '<div class="tab-pane fade" id="' + item + '">'
@@ -136,6 +148,8 @@ $(function () {
 								var filteredJSON = dataParsed.filter(function (x, i) {
 									return x.SNPEFF_effect == item;
 								})
+								var positions_f = _.keys(_.countBy(dataParsed, function (x) { return x.position}))
+								//console.log("length of filtered JSON:", filteredJSON.length)
 								var tabs = '<li><a href="#' + item +'" data-toggle="tab">' + item + '</a></li>'
 								$('#effectTabs').append(tabs)
 								////console.log($('#effectTab'))

@@ -3,13 +3,14 @@ extends ./top.jade
 block content
   .jumbotron
     .container
-      h1 Welcome to the Purugganan Oryza Data Center :P
+      h2 Welcome to the 
+      h1 Purugganan Oryza Data Center
   #main.container
     h4 You can either search by gene, or search by a variety of gene designations
     .col-lg-6
       .darkBG.col-sm-6.col-xs-12
         a.btn.btn-primary(href='/genesearch', role='button') Gene Search
       .darkBG.col-sm-6.col-xs-12
-        a.btn.btn-primary(href='/networksearch', role='button') Interaction Network Search
+        a.btn.btn-primary(href='/network', role='button') Interaction Network Search
 
   script(src='javascripts/main.js')

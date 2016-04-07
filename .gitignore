@@ -1,3 +1,11 @@
+#ignore download js min files
+boostrap.min.js
+cytoscape-cose-bilkent.js
+underscore-min.js
+
+#really just anything in this folder:
+pubilc/js/
+
 # Logs
 logs
 *.log

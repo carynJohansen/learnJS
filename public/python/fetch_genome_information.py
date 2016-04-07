@@ -2,12 +2,10 @@
 #           Env               #
 
 import sys
-from BCBio import GFF
 import numpy as np
 import pandas as pd
 import json
 import re
-import json
 
 #import configuration script
 import config
@@ -82,6 +80,8 @@ def get_info_return_dict ( gene, info_dict ):
 	end = info_dict['end']
 
 	provean_list = get_PROVEAN_scores(gene)
+	if (provean_list == 1):
+		provean_list = ['NA'] * 8
 
 	vcf_R = get_vcf_reader()
 
@@ -94,6 +94,8 @@ def get_info_return_dict ( gene, info_dict ):
 				"annotation" : info_dict['annotation'],
 				"chromosome" : rec.CHROM,
 				"position" : rec.POS,
+				"start" : info_dict['start'],
+				"end" : info_dict['end'],
 				"reference" : rec.REF,
 				"alternate" : str(rec.ALT[0]),
 				"genotype" : sample['GT'],
@@ -102,8 +104,8 @@ def get_info_return_dict ( gene, info_dict ):
 				"p_transcript_id" : provean_list[0],
 				"p_minimumScore" : provean_list[1],
 				"p_sumScore" : provean_list[2],
-				"p_deleteriousCount" : int(provean_list[3]),
-				"p_proteinLength" : int(provean_list[4]),
+				"p_deleteriousCount" : provean_list[3],
+				"p_proteinLength" : provean_list[4],
 				"p_proportionDeleterious" : provean_list[5],
 				"p_deleteriousMutations" : provean_list[6],
 				"p_deleteriousScores" : provean_list[7]
@@ -120,12 +122,11 @@ def get_PROVEAN_scores (gene) :
 	for line in provean:
 		if re.match(myregex, line):
 			provean_info.append(line)
+	if (len(provean_info) == 0):
+		return 1
 	provean_info = provean_info[0].split('\n')[0]
 	provean_list = provean_info.split('\t')
-
 	return provean_list
-
-
 
 ###############################
 #            Main             #

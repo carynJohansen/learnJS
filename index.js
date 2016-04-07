@@ -18,7 +18,7 @@ var _ = require('underscore')
 
 //Database connection
 var sqlite3 = require('sqlite3').verbose()
-var db = new sqlite3.Database('/Users/caryn/Dropbox/Project_RiceGeneticVariation/michael.db')
+var db = new sqlite3.Database('/Users/caryn/Dropbox/Project_jsLearn/simple_genes/michael.db')
 
 //port
 app.set('port', (process.env.PORT || 5000))
@@ -90,7 +90,6 @@ app.get('/searching', function (request, response) {
 		var geneval = request.query.geneInput
 		console.log('geneval in show():', geneval)
 		gene_vcf_search(geneval).then(function (geneJSON) {
-			console.log("length of python result here is:", geneJSON.length)
 			response.send( {data : geneJSON, gene : geneval} )
 		}) // close promise
 	} //close show
@@ -114,10 +113,73 @@ app.get('/searching', function (request, response) {
 	show()
 }) // close searching
 
-app.get('/networksearch', function (request, response) {
-	response.render('networksearch', {
+app.get('/network', function (request, response) {
+	response.render('network', {
 		title: 'Search Interaction Network'
 	})
+}) //close networksearch
+
+app.get('/createquery', function (request, response) {
+	
+	function return_query() {
+		var queryJSON = request.query.inputJSON
+		console.log(queryJSON)
+		create_query(queryJSON).then(function (queryStm) {
+			response.send(queryStm)
+		}) // close promise
+	} // close return query
+
+	function create_query ( jsonInfo ) {
+		return new Promise( function (fulfill, reject) {
+			var python = child.spawn('python', [__dirname + '/public/python/create_query.py', jsonInfo ])
+			var data = ''
+			python.stdout.on('data', function (chunk) {
+				data += chunk
+			}) //close stdout
+			python.stderr.on('data', function (data) {
+				console.log('python err: ' + data)
+				response.end('python error in allele counts!' + data)
+			}) //close stderr
+			python.stdout.on('end', function() {
+				fulfill(data)
+			})
+		}) // close new Promise
+	} // close create_query
+	return_query()
+}) //close createquery
+
+app.get('/querying', function (request, response) {
+	function show () {
+		testQuery().then(function (queryJSON) {
+			console.log("in the show() step of querying!")
+			console.log(queryJSON)
+			response.send(queryJSON)
+		})
+	}
+	function testQuery () {
+		return new Promise( function (fulfill, reject) {
+			var inquery = request.query.textQuery
+			console.log("and here we query the network in python...", inquery)
+			var python = child.spawn('python', [__dirname + '/public/python/network_query.py', inquery])
+			var data = ''
+			python.stdout.on('data', function (chunk) {
+				data += chunk
+			}) //close stdout
+			python.stderr.on('data', function (data) {
+				console.log('python error:', data)
+			})
+			python.stdout.on('end', function() {
+				fulfill(data)
+			})
+		}) //close new promise
+	} // close testQuery function
+	show()
+})
+
+app.get('/networkVis', function (request, response) {
+	var net_input = request.query.netInput
+	console.log("you're in networkVis:", net_input)
+	response.json(net_input)
 })
 
 app.post('/categorysearch', function (request, response) {
