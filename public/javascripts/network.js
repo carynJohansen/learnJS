@@ -54,7 +54,7 @@ $(function () {
 			success: function(data) {
 				// parse data into a JSON
 				var json = JSON.parse(data)
-				console.log(json)
+				//console.log(json)
 				// Get the filter values
 				var snp_arr = []
 				var lr_arr = []
@@ -104,7 +104,7 @@ $(function () {
 						table += '<td>' + item.target_info.snpeff_unique + '</td></tr>'
 					}
 				}) // close each
-				console.log(edgeARR)
+				//console.log(edgeARR)
 				$('#netTable').html(table)
 				$('#cy').cytoscape({
 					layout: {
