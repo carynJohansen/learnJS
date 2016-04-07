@@ -54,7 +54,6 @@ $(function () {
 			success: function(data) {
 				// parse data into a JSON
 				var json = JSON.parse(data)
-				console.log(json)
 				// Get the filter values
 				var snp_arr = []
 				var lr_arr = []

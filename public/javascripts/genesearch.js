@@ -52,6 +52,19 @@ $(function () {
 				var samples = _.keys(_.countBy(dataParsed, function (x) { return x.sample}))
 				////console.log(samples)
 				var effects = _.keys(_.countBy(dataParsed, function (x) { return x.SNPEFF_effect}))
+				$('#downloadAll').on('click', function() {
+					console.log("you clicked download!")
+					console.log(dataParsed)
+					$.ajax({
+						url: '/download',
+						data : {
+							toDownload : dataParsed
+						},
+						success: function() {
+							console.log("you've downloaded!!")
+						}
+					})
+				})
 				////console.log(effects)
 				$('#sort_category').on('change', function() {
 					if (this.value == 'sample') {

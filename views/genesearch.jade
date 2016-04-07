@@ -24,7 +24,6 @@ block content
           h4 Links
           ul#links.list-group
       
-
     .container
       h4 Predicted Deleterious Mutations (PROVEAN results):
       .col-lg-8
@@ -45,6 +44,7 @@ block content
           option(value='SNPEFF_effect') by SNPEFF effect
           option(value='genotype') by genotype
           option(value='test') working tests
+      button#downloadAll Download all results
 
     .container#sample
       ul.nav.nav-tabs
@@ -88,7 +88,6 @@ block content
             th Genotype
             th SNPEFF Effect
         tbody#VCFinfo
-    button#Download DOWNLOAD
 
     script(src="js/underscore-min.js")
     script(src="js/bootstrap.min.js")

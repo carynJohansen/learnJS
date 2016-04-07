@@ -15,6 +15,8 @@ var bodyParser = require('body-parser')
 var jade = require('jade')
 var child = require('child_process')
 var _ = require('underscore')
+var json2csv = require('json2csv')
+var fs = require('fs')
 
 //Database connection
 var sqlite3 = require('sqlite3').verbose()
@@ -188,6 +190,18 @@ app.post('/categorysearch', function (request, response) {
 
 app.get('/categorysearch', function (request, response) {
 	response.render('catsearch')
+})
+
+app.use('/download', function (request, response) {
+	console.log("you made it to download!!")
+	var dwnjson = request.query.toDownload
+	json2csv(dwnjson, function(err, csv) {
+		if (err) throw err;
+		fs.WriteFile('geneSearch.csv', csv, function(err) {
+			if (err) throw err;
+			response.download(csv)
+		})
+	})
 })
 
 // Listening //
