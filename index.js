@@ -152,6 +152,7 @@ app.get('/querying', function (request, response) {
 	function show () {
 		testQuery().then(function (queryJSON) {
 			console.log("in the show() step of querying!")
+			console.log(queryJSON)
 			response.send(queryJSON)
 		})
 	}
