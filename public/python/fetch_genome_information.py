@@ -2,7 +2,6 @@
 #           Env               #
 
 import sys
-from BCBio import GFF
 import numpy as np
 import pandas as pd
 import json

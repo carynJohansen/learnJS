@@ -182,7 +182,9 @@ def create_json (sql_result) :
 		#print target
 		interaction = {
 			"regulator" : regulator,
+			"netID_regulator" : row['netID_regulator'],
 			"target" : target,
+			"netID_target" : row['netID_target']
 		}
 		#regulator stuff
 		reg = json_by_gene(regulator)

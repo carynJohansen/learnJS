@@ -77,18 +77,18 @@ $(function () {
 					var reg_color = '#555'
 					var tar_color = '#555'
 					$(snp_arr).each(function (i, elem) {
-						if ($.inArray(elem, item.regulator_info.snpeff_unique) > 0 ) {
+						if ($.inArray(elem, item.regulator_info.snpeff_unique) >= 0 ) {
 							reg_selected = true
 							reg_color = '#DC381F'
 						}
-						if ($.inArray(elem, item.target_info.snpeff_unique) > 0) {
+						if ($.inArray(elem, item.target_info.snpeff_unique) >= 0) {
 							tar_selected = true
 							tar_color = '#DC381F'
 						} 
 					})
 					nodeARR.push({data : { id : item.netID_target, name : item.target, snpeff : item.target_info.snpeff_unique, selected : tar_selected, color : tar_color, positions : item.target_info.variant_positions, muts : item.target_info.provean_mutations }, group:"nodes",removed:false,selected:false,selectable:true,locked:false,grabbed:false,grabbable:true})
 					nodeARR.push({data : { id : item.netID_regulator , name : item.regulator, snpeff : item.regulator_info.snpeff_unique, selected : tar_selected, color : reg_color, positions : item.regulator_info.variant_positions, muts : item.regulator_info.provean_mutations }, group:"nodes",removed:false,selected:false,selectable:true,locked:false,grabbed:false,grabbable:true})
-					edgeARR.push({data : {source: item.regulator , target: item.target }, group:"edges",removed:false,selected:false,selectable:true,locked:false,grabbed:false,grabbable:true})
+					edgeARR.push({data : {source: item.netID_regulator , target: item.netID_target }, group:"edges",removed:false,selected:false,selectable:true,locked:false,grabbed:false,grabbable:true})
 					table += '<tr><td>' + item.regulator + '</td><td>' + item.regulator_info.provean_mutations + '</td>' 
 					if (typeof item.regulator_info.snpeff_unique == 'object') {
 						table += '<td>' + item.regulator_info.snpeff_unique.join(", ") + '</td>'
