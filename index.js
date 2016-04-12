@@ -51,26 +51,6 @@ app.get('/home', function (request, response) {
 	})
 }) // close get home
 
-app.get('/api/test', function(req, res) {
-	var serverInput = req.query.serverInput;
-	var output;
-	console.log("this is the serverInput", serverInput)
-	switch(serverInput) {
-		case 'hello':
-			output = 'hi';
-			break;
-		case 'goodbye':
-			output = 'fine';
-			break;
-		default:
-			output = 'sad';
-	}
-	res.json({
-		hi: output,
-		bee: 'knees'
-	});
-});
-
 app.post('/genesearch', function (request, response) {
 	console.log('you made it to post genesearch!')
 	response.render('genesearch', {

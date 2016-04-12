@@ -23,6 +23,21 @@ CHROM_DICT = {
 	"12" : "Chr12"
 }
 
+CHROM_FULL = {
+	"Chr1" : "Chromosome 1",
+	"Chr2" : "Chromosome 2",
+	"Chr3" : "Chromosome 3",
+	"Chr4" : "Chromosome 4",
+	"Chr5" : "Chromosome 5",
+	"Chr6" : "Chromosome 6",
+	"Chr7" : "Chromosome 7",
+	"Chr8" : "Chromosome 8",
+	"Chr9" : "Chromosome 9",
+	"Chr10" : "Chromosome 10",
+	"Chr11" : "Chromosome 11",
+	"Chr12" : "Chromosome 12"
+}
+
 CHROM_INFO_PATH = {
 	"01" : '/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Chr1.dir/Chr1.locus_brief_info.7.0',
 	"02" : '/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Chr2.dir/Chr2.locus_brief_info.7.0',

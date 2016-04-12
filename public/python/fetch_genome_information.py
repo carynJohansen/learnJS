@@ -26,7 +26,7 @@ def parse_input( gene_str ):
 	return chrom_split
 
 def get_vcf_reader():
-	return vcf.Reader(open('/Users/caryn/Dropbox/Project_RiceGeneticVariation/data/rice_chr2_3.vcf.gz', 'r'))
+	return vcf.Reader(open(config.VCF, 'r'))
 
 def get_MSU_info ( gene ):
 	chromNumber = parse_input(gene)
@@ -92,7 +92,7 @@ def get_info_return_dict ( gene, info_dict ):
 				"gene" : gene,
 				"sample" : sample.sample,
 				"annotation" : info_dict['annotation'],
-				"chromosome" : rec.CHROM,
+				"chromosome" : config.CHROM_FULL[chrom],
 				"position" : rec.POS,
 				"start" : info_dict['start'],
 				"end" : info_dict['end'],
