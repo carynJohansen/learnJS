@@ -141,6 +141,18 @@ block content
                 label
                   input(type='checkbox', name='prov', value='delMut')
                   | Deleterious mutations
+  .container
+    .row
+      .darkBG.col-md-4
+        .panel.panel-default
+          .panel-heading
+            | Select Network layout:
+          .panel-body
+            select#layout
+              option(value='cose') CoSE Network (default)
+              option(value='circle') Circle (directed)
+              option(value='grid') Grid (directed)
+              option(value='concentricCircle') Concentric Circle
 
   .container
     button#queryClick QUERY

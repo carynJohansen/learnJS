@@ -88,7 +88,7 @@ def get_MSU_info ( gene ):
 	if (len(gene_info) == 0):
 		error = "Gene not found."
 		return error
-	
+
 	#check for multiple isoform information
 	#print len(gene_info)
 	if (len(gene_info) > 1):
