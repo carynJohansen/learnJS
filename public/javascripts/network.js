@@ -55,7 +55,7 @@ $(function () {
 				$('#spinWheel').show()
 			},
 			success: function(data) {
-				$('#spinwheel').hide();
+				$('#spinWheel').hide();
 				// parse data into a JSON
 				var json = JSON.parse(data)
 				//console.log(json)
