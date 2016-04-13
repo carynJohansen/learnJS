@@ -29,7 +29,7 @@ $(function () {
 		} else {
 			var querySTR = '{ "select" : "' + select + '", "geneSelectInput" : "' + geneSelectInput + '", "category" : "' + category + '"}'
 		}
-		console.log(querySTR)
+		//console.log(querySTR)
 		//var queryJSON = JSON.parse(querySTR)
 		//console.log(queryJSON)
 		$.ajax({
@@ -38,8 +38,6 @@ $(function () {
 				inputJSON : querySTR
 			},
 			success: function(data) {
-				console.log('ay!')
-				console.log(data)
 				$('#textQuery').val(data)
 			} // close create Query success
 		}) //close ajax
