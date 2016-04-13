@@ -51,7 +51,11 @@ $(function () {
 			data : {
 				textQuery : in_query
 			},
+			beforeSend: function() {
+				$('#spinWheel').show()
+			},
 			success: function(data) {
+				$('#spinwheel').hide();
 				// parse data into a JSON
 				var json = JSON.parse(data)
 				//console.log(json)

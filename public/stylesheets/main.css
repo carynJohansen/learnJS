@@ -67,10 +67,16 @@ div.main {
  	position: relative;
 }
 
+#spinWheel {
+	display: none;
+}
+
 .table {
 	table-layout: fixed;
 	word-wrap: break-word;
 }
+
+
 
 /* ////////// */
 /* CheckBoxes */
