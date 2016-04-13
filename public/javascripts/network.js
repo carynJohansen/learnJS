@@ -65,8 +65,6 @@ $(function () {
 				$('input:checked[name="landrace[]"]').each( function () {
 					lr_arr.push($(this).val());
 				})
-				console.log(snp_arr)
-				console.log(lr_arr)
 				$('#testresults').show()
 				$('#cy').show()
 				var nodeARR = []
@@ -78,7 +76,6 @@ $(function () {
 					var reg_color = '#555'
 					var tar_color = '#555'
 					$(snp_arr).each(function (i, elem) {
-						console.log(typeof elem =='string')
 						if ($.inArray(elem, item.regulator_info.snpeff_unique) >= 0 ) {
 							console.log("true - in regulator.")
 							reg_selected = true
@@ -90,9 +87,6 @@ $(function () {
 							tar_color = '#DC381F'
 						} 
 					})
-
-					console.log(tar_color)
-					console.log(item.target_info.snpeff_unique)
 					nodeARR.push({data : { id : item.netID_target, name : item.target, snpeff : item.target_info.snpeff_unique, selected : tar_selected, color : tar_color, positions : item.target_info.variant_positions, muts : item.target_info.provean_mutations }, group:"nodes",removed:false,selected:false,selectable:true,locked:false,grabbed:false,grabbable:true})
 					nodeARR.push({data : { id : item.netID_regulator , name : item.regulator, snpeff : item.regulator_info.snpeff_unique, selected : tar_selected, color : reg_color, positions : item.regulator_info.variant_positions, muts : item.regulator_info.provean_mutations }, group:"nodes",removed:false,selected:false,selectable:true,locked:false,grabbed:false,grabbable:true})
 					edgeARR.push({data : {source: item.netID_regulator , target: item.netID_target }, group:"edges",removed:false,selected:false,selectable:true,locked:false,grabbed:false,grabbable:true})
@@ -111,47 +105,207 @@ $(function () {
 						table += '<td>' + item.target_info.snpeff_unique + '</td></tr>'
 					}
 				}) // close each
-				console.log(nodeARR)
 				$('#netTable').html(table)
-				$('#cy').cytoscape({
-					layout: {
-						name : 'cose-bilkent'
-					},
-					style: [
-						{"selector":"core","style":{"selection-box-color":"#AAD8FF","selection-box-border-color":"#8BB0D0","selection-box-opacity":"0.5"}},
-						{"selector":"node","style":{"content":"data(name)","font-size":"12px","text-valign":"center","text-halign":"center","text-outline-width":"2px","color":"#fff","background-color":"data(color)", "overlay-padding":"6px","z-index":"10"}},
-						{"selector":"node:selected","style":{"border-width":"6px","border-color":"#AAD8FF","border-opacity":"0.5","background-color":"#77828C","text-outline-color":"#77828C"}},
-						{"selector":"edge","style":{"curve-style":"haystack","haystack-radius":"0.5","opacity":"0.4","line-color":"#bbb","width":"mapData(weight, 0, 1, 1, 8)","overlay-padding":"3px"}},
-						{"selector":"node.unhighlighted","style":{"opacity":"0.2"}},
-						{"selector":"edge.unhighlighted","style":{"opacity":"0.05"}},
-						{"selector":".highlighted","style":{"z-index":"999999"}},
-						{"selector":"node.highlighted","style":{"border-width":"6px","border-color":"#AAD8FF","border-opacity":"0.5","background-color":"#394855","text-outline-color":"#394855","shadow-blur":"12px","shadow-color":"#000","shadow-opacity":"0.8","shadow-offset-x":"0px","shadow-offset-y":"4px"}},
-						{"selector":"edge.filtered","style":{"opacity":"0"}}],
-					elements: {
-						nodes: nodeARR,
-						edges : edgeARR
-					},
-					minZoom: 0.02,
-					maxZoom: 5,
-					ready: function(){
-    					window.cy = this;
-    					cy.elements().unselectify();
-    
-    					cy.on('tap', 'node', function(e){
-      						var node = e.cyTarget; 
-      						var neighborhood = node.neighborhood().add(node);
-      
-							cy.elements().addClass('faded');
-							neighborhood.removeClass('faded');
-						});
-    
-						cy.on('tap', function(e){
-							if( e.cyTarget === cy ){
-								cy.elements().removeClass('faded');
+				var selectedLayout = $('#layout').val()
+				console.log(selectedLayout)
+				if (selectedLayout == 'cose') {
+					$('#cy').cytoscape({
+						layout: {
+							name : 'cose-bilkent',
+							directed : true
+						},
+						style: [
+							{"selector":"core","style":{"selection-box-color":"#AAD8FF","selection-box-border-color":"#8BB0D0","selection-box-opacity":"0.5"}},
+							{"selector":"node","style":{"content":"data(name)","font-size":"12px","text-valign":"center","text-halign":"center","text-outline-width":"2px","color":"#fff","background-color":"data(color)","target-arrow-shape": "triangle","target-arrow-color": "black", "overlay-padding":"6px","z-index":"10"}},
+							{"selector":"node:selected","style":{"border-width":"6px","border-color":"#AAD8FF","border-opacity":"0.5","background-color":"#77828C","text-outline-color":"#77828C"}},
+							{"selector":"edge","style":{"curve-style":"haystack","haystack-radius":"0.5","opacity":"0.4","line-color":"#bbb","width":"mapData(weight, 0, 1, 1, 8)","overlay-padding":"3px"}},
+							{"selector":"node.unhighlighted","style":{"opacity":"0.2"}},
+							{"selector":"edge.unhighlighted","style":{"opacity":"0.05"}},
+							{"selector":".highlighted","style":{"z-index":"999999"}},
+							{"selector":"node.highlighted","style":{"border-width":"6px","border-color":"#AAD8FF","border-opacity":"0.5","background-color":"#394855","text-outline-color":"#394855","shadow-blur":"12px","shadow-color":"#000","shadow-opacity":"0.8","shadow-offset-x":"0px","shadow-offset-y":"4px"}},
+							{"selector":"edge.filtered","style":{"opacity":"0"}}],
+						elements: {
+							nodes: nodeARR,
+							edges : edgeARR
+						},
+						minZoom: 0.02,
+						maxZoom: 5,
+						ready: function(){
+	    					window.cy = this;
+	    					cy.elements().unselectify();
+	    
+	    					cy.on('tap', 'node', function(e){
+	      						var node = e.cyTarget; 
+	      						var neighborhood = node.neighborhood().add(node);
+	      
+								cy.elements().addClass('faded');
+								neighborhood.removeClass('faded');
+							});
+	    
+							cy.on('tap', function(e){
+								if( e.cyTarget === cy ){
+									cy.elements().removeClass('faded');
+								}
+							})
+						} // close cytoscape ready function 
+					})// close cytoscape
+				} // close if cose cytoscape option
+				if (selectedLayout == 'circle') {
+					$('#cy').cytoscape({
+						layout: {
+							name: 'circle'
+						},
+						style: [
+							{ selector: 'node',
+								style: {
+									'height': 20,
+									'width': 20,
+									'background-color': 'data(color)',
+									'content' : 'data(name)'
+								}
+							},
+							{ selector: 'edge',
+								style: {
+									'width': 5,
+									'opacity': 0.7,
+									'line-color': '#F87217',
+									'target-arrow-shape' : 'triangle',
+									'target-arrow-color' : '#F87217'
+								}
 							}
-						})
-					} // close cytoscape ready function 
-				})// close cytoscape
+						],
+						elements: {
+							nodes: nodeARR,
+							edges : edgeARR
+						},
+						minZoom: 0.02,
+						maxZoom: 5,
+						ready: function(){
+	    					window.cy = this;
+	    					cy.elements().unselectify();
+	    
+	    					cy.on('tap', 'node', function(e){
+	      						var node = e.cyTarget; 
+	      						var neighborhood = node.neighborhood().add(node);
+	      
+								cy.elements().addClass('faded');
+								neighborhood.removeClass('faded');
+							});
+	    
+							cy.on('tap', function(e){
+								if( e.cyTarget === cy ){
+									cy.elements().removeClass('faded');
+								}
+							})
+						} // close cytoscape ready function 
+					})// close cytoscape
+				} // close if layout is circle
+				if (selectedLayout == 'grid') {
+					$('#cy').cytoscape({
+						layout: {
+							name: 'grid'
+						},
+						style: [
+							{ selector: 'node',
+								style: {
+									'height': 20,
+									'width': 20,
+									'background-color': 'data(color)',
+									'content' : 'data(name)'
+								}
+							},
+							{ selector: 'edge',
+								style: {
+									'width': 5,
+									'opacity': 0.7,
+									'line-color': '#F87217',
+									'target-arrow-shape' : 'triangle',
+									'target-arrow-color' : '#F87217'
+								}
+							}
+						],
+						elements: {
+							nodes: nodeARR,
+							edges : edgeARR
+						},
+						minZoom: 0.02,
+						maxZoom: 5,
+						ready: function(){
+	    					window.cy = this;
+	    					cy.elements().unselectify();
+	    
+	    					cy.on('tap', 'node', function(e){
+	      						var node = e.cyTarget; 
+	      						var neighborhood = node.neighborhood().add(node);
+	      
+								cy.elements().addClass('faded');
+								neighborhood.removeClass('faded');
+							});
+	    
+							cy.on('tap', function(e){
+								if( e.cyTarget === cy ){
+									cy.elements().removeClass('faded');
+								}
+							})
+						} // close cytoscape ready function 
+					})// close cytoscape
+				} // close if layout is grid
+				if (selectedLayout == 'concentricCircle') {
+					$('#cy').cytoscape({
+						layout: {
+							name: 'concentric',
+							concentric: function( node ){
+								return node.degree();
+							},
+							levelWidth: function( nodes ){
+								return 2;
+							}
+						},
+						 style: [
+							{ selector: 'node',
+								style: {
+									'height': 20,
+									'width': 20,
+									'background-color': 'data(color)',
+									'content' : 'data(name)'
+								}
+							},
+							{ selector: 'edge',
+								style: {
+									'width': 5,
+									'opacity': 0.7,
+									'line-color': '#F87217',
+									'target-arrow-shape' : 'triangle',
+									'target-arrow-color' : '#F87217'
+								}
+							}
+						],
+						elements: {
+							nodes: nodeARR,
+							edges : edgeARR
+						},
+						minZoom: 0.02,
+						maxZoom: 5,
+						ready: function(){
+	    					window.cy = this;
+	    					cy.elements().unselectify();
+	    
+	    					cy.on('tap', 'node', function(e){
+	      						var node = e.cyTarget; 
+	      						var neighborhood = node.neighborhood().add(node);
+	      
+								cy.elements().addClass('faded');
+								neighborhood.removeClass('faded');
+							});
+	    
+							cy.on('tap', function(e){
+								if( e.cyTarget === cy ){
+									cy.elements().removeClass('faded');
+								}
+							})
+						} // close cytoscape ready function 
+					})// close cytoscape
+				} // close if layout is concentric circle
 			} // close success
 		}) // close ajax
 	}) //close on click

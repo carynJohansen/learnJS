@@ -23,7 +23,7 @@ import time
 ###################
 #    SQL Engine   #
 
-engine = create_engine('sqlite:////Users/caryn/Dropbox/Project_jsLearn/simple_genes/michael.db')
+engine = create_engine('sqlite:////Users/caryn/Dropbox/Project_RiceGeneticVariation/michael_04042016.db')
 connect = engine.connect().connection
 
 ###############################
