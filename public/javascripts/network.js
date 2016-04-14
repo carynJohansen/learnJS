@@ -79,18 +79,10 @@ $(function () {
 					var tar_color = '#555'
 					$(snp_arr).each(function (i, elem) {
 						if ($.inArray(elem, item.regulator_info.snpeff_unique) >= 0 ) {
-<<<<<<< HEAD
-=======
-							console.log("true - in regulator.")
->>>>>>> coseStyle
 							reg_selected = true
 							reg_color = '#1FC2DB'
 						}
 						if ($.inArray(elem, item.target_info.snpeff_unique) >= 0) {
-<<<<<<< HEAD
-=======
-							console.log("true, in target.")
->>>>>>> coseStyle
 							tar_selected = true
 							tar_color = '#1FC2DB'
 						} 
@@ -113,10 +105,6 @@ $(function () {
 						table += '<td>' + item.target_info.snpeff_unique + '</td></tr>'
 					}
 				}) // close each
-<<<<<<< HEAD
-				//console.log(edgeARR)
-=======
->>>>>>> coseStyle
 				$('#netTable').html(table)
 				var selectedLayout = $('#layout').val()
 				console.log(selectedLayout)
