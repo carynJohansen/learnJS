@@ -123,7 +123,7 @@ app.get('/createquery', function (request, response) {
 	
 	function return_query() {
 		var queryJSON = request.query.inputJSON
-		console.log(queryJSON)
+		//console.log(queryJSON)
 		create_query(queryJSON).then(function (queryStm) {
 			response.send(queryStm)
 		}) // close promise
@@ -152,7 +152,7 @@ app.get('/querying', function (request, response) {
 	function show () {
 		testQuery().then(function (queryJSON) {
 			console.log("in the show() step of querying!")
-			console.log(queryJSON)
+			//console.log(queryJSON)
 			response.send(queryJSON)
 		})
 	}
