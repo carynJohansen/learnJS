@@ -70,16 +70,25 @@ div.main {
 #spinWheel {
 	display: none;
 	text-align: center;
-	height: 900px;
+	height: 400px;
 	width: 100%;
+}
+
+.Centerer {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.Centered {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .table {
 	table-layout: fixed;
 	word-wrap: break-word;
 }
-
-
 
 /* ////////// */
 /* CheckBoxes */
