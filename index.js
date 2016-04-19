@@ -95,6 +95,33 @@ app.get('/searching', function (request, response) {
 	show()
 }) // close searching
 
+app.get('/downloadRegionVCF', function (request, response) {
+	console.log("you clicked!")
+	function return_vcf() {
+		var geneval = request.query.geneInput
+		create_vcf(geneval).then(function() {
+			response.send()
+		})
+	}
+	function create_vcf(gene) {
+		console.log(gene)
+		return new Promise( function (fullfill, reject) {
+			var python = child.spawn('python', [__dirname + '/public/python/write_region_vcf.py', gene])
+			var data = ''
+			python.stdout.on('data', function (chunk) {
+				data += chunk
+			}) //close stdout
+			python.stderr.on('data', function (data) {
+				console.log('python err: ' + data)
+				response.end('python error in allele counts!' + data)
+			}) //close stderr
+			python.stdout.on('end', function() {
+				fulfill(data)
+			})
+		}) // close Promise
+	} // close create_vcf function
+})
+
 app.get('/network', function (request, response) {
 	response.render('network', {
 		title: 'Search Interaction Network'

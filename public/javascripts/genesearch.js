@@ -54,19 +54,19 @@ $(function () {
 				var samples = _.keys(_.countBy(dataParsed, function (x) { return x.sample}))
 				////console.log(samples)
 				var effects = _.keys(_.countBy(dataParsed, function (x) { return x.SNPEFF_effect}))
-				$('#downloadAll').on('click', function() {
-					console.log("you clicked download!")
-					console.log(dataParsed)
-					$.ajax({
-						url: '/download',
-						data : {
-							toDownload : dataParsed
-						},
-						success: function() {
-							console.log("you've downloaded!!")
-						}
-					})
-				})
+//				$('#downloadAll').on('click', function() {
+//					console.log("you clicked download!")
+//					console.log(dataParsed)
+//					$.ajax({
+//						url: '/download',
+//						data : {
+//							toDownload : dataParsed
+//						},
+//						success: function() {
+//							console.log("you've downloaded!!")
+//						}
+//					})
+//				})
 				////console.log(effects)
 				$('#sort_category').on('change', function() {
 					if (this.value == 'sample') {
@@ -200,7 +200,17 @@ $(function () {
 					} //close test
 				})
 				//console.log("you're in client and length of data is:", data.length)
-//				$("#AJAXresults").html(data);
+				$('#downloadAll').on('click', function() {
+					$.ajax({
+						url: '/downloadRegionVCF',
+						data: {
+							geneInput : in_gene
+						},
+						success: function() {
+							console.log("you didn't need data!")
+						}
+					}) //close ajax
+				}) //close click downloadAll
 			} //close success
 		}); //close .ajax
 	}) //close on click

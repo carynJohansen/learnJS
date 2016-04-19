@@ -60,3 +60,25 @@ def get_MSU_info ( gene ):
 	#if there are no isoforms, return gene_info
 	return gene_info
 
+def write_vcf(msu_info):
+	msu = msu_info[0].split('\t')
+	chrom = msu[0]
+	start = int(msu[3])
+	end = int(msu[4])
+
+	vcf_reader = get_vcf_reader()
+	vcf_writer = vcf.Writer(open('tmp/region.vcf', 'w'), vcf_reader)
+
+	for rec in vcf_reader.fetch(chrom, start, end):
+		vcf_writer.write_record(rec)
+
+###############################
+#            Main             #
+
+if __name__ == '__main__':
+	file, gene = sys.argv
+
+	msu_info = get_MSU_info(gene)
+	write_vcf(msu_info)
+
+
