@@ -64,6 +64,7 @@ $(function () {
 				$('input[name="snpeff[]"]:checked').each(function() {
 					snp_arr.push($(this).val())
 				})
+				console.log(snp_arr)
 				$('input:checked[name="landrace[]"]').each( function () {
 					lr_arr.push($(this).val());
 				})

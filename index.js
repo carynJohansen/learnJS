@@ -49,26 +49,6 @@ app.get('/home', function (request, response) {
 	})
 }) // close get home
 
-app.get('/api/test', function(req, res) {
-	var serverInput = req.query.serverInput;
-	var output;
-	console.log("this is the serverInput", serverInput)
-	switch(serverInput) {
-		case 'hello':
-			output = 'hi';
-			break;
-		case 'goodbye':
-			output = 'fine';
-			break;
-		default:
-			output = 'sad';
-	}
-	res.json({
-		hi: output,
-		bee: 'knees'
-	});
-});
-
 app.post('/genesearch', function (request, response) {
 	console.log('you made it to post genesearch!')
 	response.render('genesearch', {
@@ -90,6 +70,7 @@ app.get('/searching', function (request, response) {
 		var geneval = request.query.geneInput
 		console.log('geneval in show():', geneval)
 		gene_vcf_search(geneval).then(function (geneJSON) {
+			console.log(geneJSON)
 			response.send( {data : geneJSON, gene : geneval} )
 		}) // close promise
 	} //close show
@@ -152,7 +133,7 @@ app.get('/querying', function (request, response) {
 	function show () {
 		testQuery().then(function (queryJSON) {
 			console.log("in the show() step of querying!")
-			//console.log(queryJSON)
+			console.log(queryJSON)
 			response.send(queryJSON)
 		})
 	}
