@@ -32,7 +32,8 @@ $(function () {
 				var ann = dataParsed[1].annotation
 				var  start = dataParsed[1].start
 				var end = dataParsed[1].end
-				var list1 = '<li class="list-group-item"> Gene start: ' + start + '</li><li class="list-group-item">Gene end: ' + end + '</li><li class="list-group-item">Annotation: ' + ann + '</li></ul>'
+				var chrom = dataParsed[1].chromosome
+				var list1 = '<li class="list-group-item">' + chrom + '</li><li class="list-group-item"> Gene start: ' + start + '</li><li class="list-group-item">Gene end: ' + end + '</li><li class="list-group-item">Annotation: ' + ann + '</li></ul>'
 				$('#annotation').append(list1)
 				//show links
 				var links = '<li class="list-group-item"><a href="http://rice.plantbiology.msu.edu/cgi-bin/ORF_infopage.cgi?orf=' + data.gene + '" target="_newtab"> MSU Gene Information Page </a></li>'

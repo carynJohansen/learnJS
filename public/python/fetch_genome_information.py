@@ -92,7 +92,7 @@ def get_info_return_dict ( gene, info_dict ):
 				"gene" : gene,
 				"sample" : sample.sample,
 				"annotation" : info_dict['annotation'],
-				"chromosome" : rec.CHROM,
+				"chromosome" : config.CHROM_FULL[chrom],
 				"position" : rec.POS,
 				"start" : info_dict['start'],
 				"end" : info_dict['end'],
