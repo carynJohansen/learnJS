@@ -34,7 +34,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 //app.use(express.logger('dev'))
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 
 // Methods //
@@ -100,12 +100,14 @@ app.get('/downloadRegionVCF', function (request, response) {
 	function return_vcf() {
 		var geneval = request.query.geneInput
 		create_vcf(geneval).then(function() {
-			response.send()
-		})
-	}
+			var file = __dirname + '/public/python/tmp/region.vcf';
+			console.log(file)
+			response.download(file)
+			});
+		}; //close return_vcf()
 	function create_vcf(gene) {
 		console.log(gene)
-		return new Promise( function (fullfill, reject) {
+		return new Promise( function (fulfill, reject) {
 			var python = child.spawn('python', [__dirname + '/public/python/write_region_vcf.py', gene])
 			var data = ''
 			python.stdout.on('data', function (chunk) {
@@ -120,7 +122,8 @@ app.get('/downloadRegionVCF', function (request, response) {
 			})
 		}) // close Promise
 	} // close create_vcf function
-})
+	return_vcf()
+}) // close downlosRegionVCF
 
 app.get('/network', function (request, response) {
 	response.render('network', {
@@ -201,14 +204,37 @@ app.get('/categorysearch', function (request, response) {
 
 app.use('/download', function (request, response) {
 	console.log("you made it to download!!")
-	var dwnjson = request.query.toDownload
-	json2csv(dwnjson, function(err, csv) {
-		if (err) throw err;
-		fs.WriteFile('geneSearch.csv', csv, function(err) {
-			if (err) throw err;
-			response.download(csv)
-		})
-	})
+	function dwnld() {
+		var geneval = request.query.geneInput
+		create_vcf(geneval).then(function (regionVCF) {
+			response.download(queryStm)
+		}) // close promise
+	}
+//	json2csv(dwnjson, function(err, csv) {
+//		if (err) throw err;
+//		fs.WriteFile('geneSearch.csv', csv, function(err) {
+//			if (err) throw err;
+//			response.download(csv)
+//		})
+//	})
+	function create_vcf(gene) {
+		console.log(gene)
+		return new Promise( function (fulfill, reject) {
+			var python = child.spawn('python', [__dirname + '/public/python/write_region_vcf.py', gene])
+			var data = ''
+			python.stdout.on('data', function (chunk) {
+				data += chunk
+			}) //close stdout
+			python.stderr.on('data', function (data) {
+				console.log('python err: ' + data)
+				response.end('python error in allele counts!' + data)
+			}) //close stderr
+			python.stdout.on('end', function() {
+				fulfill(data)
+			})
+		}) // close Promise
+	} // close create_vcf function
+	dwnld()
 })
 
 // Listening //

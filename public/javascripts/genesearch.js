@@ -201,6 +201,7 @@ $(function () {
 				})
 				//console.log("you're in client and length of data is:", data.length)
 				$('#downloadAll').on('click', function() {
+					console.log("YOU CLICKED DOWNLOAD ALL :D narf")
 					$.ajax({
 						url: '/downloadRegionVCF',
 						data: {

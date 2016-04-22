@@ -67,10 +67,11 @@ def write_vcf(msu_info):
 	end = int(msu[4])
 
 	vcf_reader = get_vcf_reader()
-	vcf_writer = vcf.Writer(open('tmp/region.vcf', 'w'), vcf_reader)
+	vcf_writer = vcf.Writer(open('/Users/caryn/Dropbox/Project_jsLearn/simple_genes/public/python/tmp/region.vcf', 'w'), vcf_reader)
 
 	for rec in vcf_reader.fetch(chrom, start, end):
 		vcf_writer.write_record(rec)
+		print rec
 
 ###############################
 #            Main             #
@@ -80,5 +81,6 @@ if __name__ == '__main__':
 
 	msu_info = get_MSU_info(gene)
 	write_vcf(msu_info)
+	sys.stdout.flush()
 
 

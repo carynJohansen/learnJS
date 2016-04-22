@@ -72,6 +72,14 @@ def get_start_stop ( info_line ):
 	}
 	return info
 
+#def get_exon_info (gene, pos):
+#	chromNumber = parse_input(gene)
+#	infoFile = config.GFF_PATH[chromNumber]
+#	gff = open(infoFile, 'r')
+#	
+#	for line in gff:
+		
+
 
 def get_info_return_dict ( gene, info_dict ):
 	"""get the genotypes for each position for each sample"""
