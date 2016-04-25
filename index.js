@@ -102,7 +102,7 @@ app.get('/downloadRegionVCF', function (request, response) {
 	console.log(__dirname)
 	function return_vcf() {
 		var geneval = request.query.geneInput
-		create_vcf(geneval).then(function() {)
+		create_vcf(geneval).then(function() {
 			response.send()
 		});
 	}; //close return_vcf()
@@ -165,7 +165,6 @@ app.get('/querying', function (request, response) {
 	function show () {
 		testQuery().then(function (queryJSON) {
 			console.log("in the show() step of querying!")
-			console.log(queryJSON)
 			response.send(queryJSON)
 		})
 	}
