@@ -34,10 +34,12 @@ block content
               th Provean Scores
           tbody#proveanInfo
 
-    button#downloadAll Download VCF for this region
-
-    a(href='https://momentumdash.com/', target='_newtab') Download VCF
-
+    .btn-group(rolw='group', aria-label='...')
+      button#downloadAll.btn.btn-warning(type='button') Create VCF for this region
+    
+    #vcfcont
+      a#vcfDwnld(href='http://localhost:5000/python/tmp/region.vcf', target='_newtab') Download VCF
+    br
     .container
       h4 Select result display and sort options 
         select#sort_category

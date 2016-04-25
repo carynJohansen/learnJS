@@ -208,7 +208,8 @@ $(function () {
 							geneInput : in_gene
 						},
 						success: function() {
-							console.log("you didn't need data!")
+							$('#vcfcont').show()
+							$('#downloadAll').hide()
 						}
 					}) //close ajax
 				}) //close click downloadAll

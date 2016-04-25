@@ -25,6 +25,9 @@ var db = new sqlite3.Database('/Users/caryn/Dropbox/Project_jsLearn/simple_genes
 //port
 app.set('port', (process.env.PORT || 5000))
 
+app.use(express.static('public'));
+console.log(__dirname)
+
 //set views
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
@@ -34,8 +37,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 //app.use(express.logger('dev'))
-app.use(express.static(path.join(__dirname, '/public')));
-
 
 // Methods //
 
@@ -97,14 +98,13 @@ app.get('/searching', function (request, response) {
 
 app.get('/downloadRegionVCF', function (request, response) {
 	console.log("you clicked!")
+	console.log(__dirname)
 	function return_vcf() {
 		var geneval = request.query.geneInput
-		create_vcf(geneval).then(function() {
-			var file = __dirname + '/public/python/tmp/region.vcf';
-			console.log(file)
-			response.download(file)
-			});
-		}; //close return_vcf()
+		create_vcf(geneval).then(function() {)
+			response.send()
+		});
+	}; //close return_vcf()
 	function create_vcf(gene) {
 		console.log(gene)
 		return new Promise( function (fulfill, reject) {
