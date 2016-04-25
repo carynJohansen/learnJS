@@ -6,6 +6,8 @@ VCF='/Users/caryn/Dropbox/Project_RiceGeneticVariation/data/rice_chr2_3.vcf.gz'
 
 DATABASE='/Users/caryn/Dropbox/Project_RiceGeneticVariation/michael_04042016.db'
 
+PROVEAN = '/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Ines_provean_assemble.out'
+
 # dictionary for interpreting chromosome
 
 CHROM_DICT = {
@@ -53,4 +55,17 @@ CHROM_INFO_PATH = {
 	"12" : '/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Chr12.dir/Chr12.locus_brief_info.7.0'
 }
 
-PROVEAN = '/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Ines_provean_assemble.out'
+GFF_PATH = {
+	"01" : "/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Chr1.dir/Chr1.cleaned.gff3",
+	"02" : "/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Chr1.dir/Chr2.cleaned.gff3",
+	"03" : "/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Chr1.dir/Chr3.cleaned.gff3",
+	"04" : "/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Chr1.dir/Chr4.cleaned.gff3",
+	"05" : "/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Chr1.dir/Chr5.cleaned.gff3",
+	"06" : "/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Chr1.dir/Chr6.cleaned.gff3",
+	"07" : "/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Chr1.dir/Chr7.cleaned.gff3",
+	"08" : "/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Chr1.dir/Chr8.cleaned.gff3",
+	"09" : "/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Chr1.dir/Chr9.cleaned.gff3",
+	"10" : "/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Chr1.dir/Chr10.cleaned.gff3",
+	"11" : "/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Chr1.dir/Chr11.cleaned.gff3",
+	"12" : "/Users/caryn/Dropbox/Project_jsLearn/simple_genes/data/Chr1.dir/Chr12.cleaned.gff3"
+}

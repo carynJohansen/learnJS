@@ -24,7 +24,6 @@ block content
           h4 Links
           ul#links.list-group
       
-
     .container
       h4 Predicted Deleterious Mutations (PROVEAN results):
       .col-lg-8
@@ -35,6 +34,12 @@ block content
               th Provean Scores
           tbody#proveanInfo
 
+    .btn-group(rolw='group', aria-label='...')
+      button#downloadAll.btn.btn-warning(type='button') Create VCF for this region
+    
+    #vcfcont
+      a#vcfDwnld(href='http://localhost:5000/python/tmp/region.vcf', target='_newtab') Download VCF
+    br
     .container
       h4 Select result display and sort options 
         select#sort_category
@@ -46,6 +51,7 @@ block content
           option(value='genotype') by genotype
           option(value='test') working tests
 
+    br
     .container#sample
       ul.nav.nav-tabs
         li.dropdown

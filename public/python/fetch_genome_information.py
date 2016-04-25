@@ -26,7 +26,7 @@ def parse_input( gene_str ):
 	return chrom_split
 
 def get_vcf_reader():
-	return vcf.Reader(open('/Users/caryn/Dropbox/Project_RiceGeneticVariation/data/rice_chr2_3.vcf.gz', 'r'))
+	return vcf.Reader(open(config.VCF, 'r'))
 
 def get_MSU_info ( gene ):
 	chromNumber = parse_input(gene)
@@ -71,6 +71,14 @@ def get_start_stop ( info_line ):
 		"annotation" : splitline[9]
 	}
 	return info
+
+#def get_exon_info (gene, pos):
+#	chromNumber = parse_input(gene)
+#	infoFile = config.GFF_PATH[chromNumber]
+#	gff = open(infoFile, 'r')
+#	
+#	for line in gff:
+		
 
 
 def get_info_return_dict ( gene, info_dict ):

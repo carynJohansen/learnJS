@@ -15,6 +15,8 @@ var bodyParser = require('body-parser')
 var jade = require('jade')
 var child = require('child_process')
 var _ = require('underscore')
+var json2csv = require('json2csv')
+var fs = require('fs')
 
 //Database connection
 var sqlite3 = require('sqlite3').verbose()
@@ -22,6 +24,9 @@ var db = new sqlite3.Database('/Users/caryn/Dropbox/Project_jsLearn/simple_genes
 
 //port
 app.set('port', (process.env.PORT || 5000))
+
+app.use(express.static('public'));
+console.log(__dirname)
 
 //set views
 app.set('views', __dirname + '/views');
@@ -32,8 +37,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 //app.use(express.logger('dev'))
-app.use(express.static(path.join(__dirname, 'public')));
-
 
 // Methods //
 
@@ -93,6 +96,35 @@ app.get('/searching', function (request, response) {
 	} // close gene_vcf_search
 	show()
 }) // close searching
+
+app.get('/downloadRegionVCF', function (request, response) {
+	console.log("you clicked!")
+	console.log(__dirname)
+	function return_vcf() {
+		var geneval = request.query.geneInput
+		create_vcf(geneval).then(function() {)
+			response.send()
+		});
+	}; //close return_vcf()
+	function create_vcf(gene) {
+		console.log(gene)
+		return new Promise( function (fulfill, reject) {
+			var python = child.spawn('python', [__dirname + '/public/python/write_region_vcf.py', gene])
+			var data = ''
+			python.stdout.on('data', function (chunk) {
+				data += chunk
+			}) //close stdout
+			python.stderr.on('data', function (data) {
+				console.log('python err: ' + data)
+				response.end('python error in allele counts!' + data)
+			}) //close stderr
+			python.stdout.on('end', function() {
+				fulfill(data)
+			})
+		}) // close Promise
+	} // close create_vcf function
+	return_vcf()
+}) // close downlosRegionVCF
 
 app.get('/network', function (request, response) {
 	response.render('network', {
@@ -169,6 +201,41 @@ app.post('/categorysearch', function (request, response) {
 
 app.get('/categorysearch', function (request, response) {
 	response.render('catsearch')
+})
+
+app.use('/download', function (request, response) {
+	console.log("you made it to download!!")
+	function dwnld() {
+		var geneval = request.query.geneInput
+		create_vcf(geneval).then(function (regionVCF) {
+			response.download(queryStm)
+		}) // close promise
+	}
+//	json2csv(dwnjson, function(err, csv) {
+//		if (err) throw err;
+//		fs.WriteFile('geneSearch.csv', csv, function(err) {
+//			if (err) throw err;
+//			response.download(csv)
+//		})
+//	})
+	function create_vcf(gene) {
+		console.log(gene)
+		return new Promise( function (fulfill, reject) {
+			var python = child.spawn('python', [__dirname + '/public/python/write_region_vcf.py', gene])
+			var data = ''
+			python.stdout.on('data', function (chunk) {
+				data += chunk
+			}) //close stdout
+			python.stderr.on('data', function (data) {
+				console.log('python err: ' + data)
+				response.end('python error in allele counts!' + data)
+			}) //close stderr
+			python.stdout.on('end', function() {
+				fulfill(data)
+			})
+		}) // close Promise
+	} // close create_vcf function
+	dwnld()
 })
 
 // Listening //
