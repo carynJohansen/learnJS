@@ -127,8 +127,11 @@ def get_info_return_dict ( gene, info_dict):
 
 	vcf_R = get_vcf_reader()
 
+	gene_gff = get_gene_gff(gene)
+
 	gene_records = []
 	for rec in vcf_R.fetch(chrom, start, end):
+		iso = get_gene_gff_info(gene_gff, rec.POS)
 		for sample in rec.samples:
 			rw = {
 				"gene" : gene,
@@ -136,6 +139,7 @@ def get_info_return_dict ( gene, info_dict):
 				"annotation" : info_dict['annotation'],
 				"chromosome" : config.CHROM_FULL[chrom],
 				"position" : rec.POS,
+				"gene_feature_location" : iso,
 				"start" : info_dict['start'],
 				"end" : info_dict['end'],
 				"reference" : rec.REF,

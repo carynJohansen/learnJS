@@ -77,6 +77,7 @@ $(function () {
 								var tablehead = '<table class="table"><tr><th>Chromosome</th><th>Sample</th><th>Position</th><th>Reference</th><th>Alt</th><th>Genotype</th><th>SNPEFF Effect</th></tr></thead><tbody id="tbody' + item +'">'
 								$('#' + item).append(tablehead)
 								$(filteredJSON).each(function (i, elem) {
+									console.log(elem.gene_feature_location)
 									if( elem.genotype == '1/1' || elem.genotype == '0/1' || elem.genotype == '1/0') {
 										var rw = '<tr class="has_alt">'
 									} else {
