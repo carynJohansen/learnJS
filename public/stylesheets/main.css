@@ -2,6 +2,7 @@
 
 body {
 	background: white;
+	padding-bottom: 50px;
 }
 
 div.main {
@@ -24,6 +25,10 @@ div.main {
 
 .has_alt {
 	background-color: #F75D59;
+}
+
+td .target_sep {
+	border-left: solid 2px #000000;
 }
 
 /* Initial Gene Search Box */

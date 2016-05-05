@@ -47,9 +47,9 @@ block content
           option(value='no_sort') no sort
           option(value='sample') by sample
           option(value='position') by position
+          option(value='feature') by feature
           option(value='SNPEFF_effect') by SNPEFF effect
           option(value='genotype') by genotype
-          option(value='test') working tests
 
     br
     .container#sample
@@ -71,8 +71,6 @@ block content
       #positionContent.tab-content
 
     .container#SNPEFF_effect
-      | There should be a brief summary here... Number of positions. I should also make the SNPEFF effects tabs, since 
-      | there will never be that many of them
       ul.nav.nav-tabs
         li.dropdown
           a#effectDrop.dropdown-toggle(href='#', data-toggle='dropdown')

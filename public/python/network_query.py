@@ -132,15 +132,10 @@ def json_by_gene ( gene ):
 	provean = get_PROVEAN_scores(gene)
 
 	#get VCF info
-	if (msu[0] == 'Chr2' or msu[0] == 'Chr3'):
-		vcf_info = get_VCF_info(gene, msu)
-		snpeff = vcf_info['snpeff']
-		snpeff_u = list(set(snpeff))
-		positions = vcf_info['positions']
-	else :
-		snpeff = "no current VCF information"
-		snpeff_u = "no current VCF information"
-		positions = "no current VCF information"
+	vcf_info = get_VCF_info(gene, msu)
+	snpeff = vcf_info['snpeff']
+	snpeff_u = list(set(snpeff))
+	positions = vcf_info['positions']
 
 	#options for provean outputs
 	if (provean == 1) :

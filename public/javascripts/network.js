@@ -1,4 +1,3 @@
-
 /////////////////////////////
 ////    client side     ////
 ///////////////////////////
@@ -97,7 +96,7 @@ $(function () {
 					else {
 						table += '<td>' + item.regulator_info.snpeff_unique + '</td>'
 					}
-					table += '<td>' + item.target + '</td><td>' + item.target_info.provean_mutations + '</td>'
+					table += '<td class="target_sep">' + item.target + '</td><td>' + item.target_info.provean_mutations + '</td>'
 					if (typeof item.target_info.snpeff_unique == 'object') {
 						table += '<td>' + item.target_info.snpeff_unique.join(", ") + '</td></tr>'
 					}

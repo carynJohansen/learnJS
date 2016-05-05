@@ -72,16 +72,50 @@ def get_start_stop ( info_line ):
 	}
 	return info
 
-#def get_exon_info (gene, pos):
-#	chromNumber = parse_input(gene)
-#	infoFile = config.GFF_PATH[chromNumber]
-#	gff = open(infoFile, 'r')
-#	
-#	for line in gff:
-		
+def get_gene_gff (gene):
+	chromNumber = parse_input(gene)
+	infoFile = config.GFF_PATH[chromNumber]
+	gff = open(infoFile, 'r')
+
+	myregex = r".*" + re.escape(gene) + r".*"
+	gene_gff = []
+	for line in gff:
+		if re.match(myregex, line):
+			gene_gff.append(line)
+	#print len(gene_gff)
+	return gene_gff
+
+def get_gene_gff_info (gene_gff, position):
+	pos_gff_info = []
+
+	prev_end = 0
+	for line in gene_gff:
+		splitline = line.split('\t')
+		if position > int(splitline[3]) and position < int(splitline[4]):
+			info_split = splitline[8].split(';')[0]
+			iso_info = info_split.split(':')[0].split('=')[1]
+			iso = {
+				"isoform" : iso_info,
+				"feature" :  splitline[2]
+			}
+			pos_gff_info.append(iso)
+			prev_end = int(splitline[4])
+			continue
+		if position < int(splitline[3]) and position > prev_end:
+			iso = {
+				"isoform" : "none",
+				"feature" : "intron"
+			}
+			pos_gff_info.append(iso)
+			prev_end = int(splitline[4])
+			continue
+		else:
+			continue
+
+	return pos_gff_info
 
 
-def get_info_return_dict ( gene, info_dict ):
+def get_info_return_dict ( gene, info_dict):
 	"""get the genotypes for each position for each sample"""
 	chrom = info_dict['chrom']
 	start = info_dict['start']
@@ -148,6 +182,7 @@ if __name__ == '__main__':
 		print 1
 		sys.exit()
 	info = get_start_stop(info_line)
+	#gene_gff = get_gene_gff(gene)
 	results = get_info_return_dict(gene, info)
 	print results
 	sys.stdout.flush()

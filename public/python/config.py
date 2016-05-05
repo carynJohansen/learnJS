@@ -2,7 +2,7 @@
 
 pyvcf = '/Users/caryn/Dropbox/Project_RiceGeneticVariation/database/vcf'
 
-VCF='/Users/caryn/Dropbox/Project_RiceGeneticVariation/data/rice_chr2_3.vcf.gz'
+VCF='/Users/caryn/Dropbox/Project_RiceGeneticVariation/bwa_msdr_MRE_F.vcf.gz'
 
 DATABASE='/Users/caryn/Dropbox/Project_RiceGeneticVariation/michael_04042016.db'
 
