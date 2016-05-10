@@ -63,6 +63,13 @@ td .target_sep {
 	display: none;
 }
 
+#summary {
+	display: none;
+	outline: 1px solid #D3D3D3;
+	height: 400px;
+	width: 100%;
+}
+
 #cy {
 	display: none;
 	outline: 1px solid #D3D3D3;

@@ -57,20 +57,63 @@ $(function () {
 				// parse data into a JSON
 				var json = JSON.parse(data)
 				// Get the filter values
+				console.log(json[1])
 				var snp_arr = []
 				var lr_arr = []
 				$('input[name="snpeff[]"]:checked').each(function() {
 					snp_arr.push($(this).val())
 				})
-				console.log(snp_arr)
+				//console.log(snp_arr)
 				$('input:checked[name="landrace[]"]').each( function () {
 					lr_arr.push($(this).val());
 				})
 				$('#testresults').show()
+				$('#summary').show()
 				$('#cy').show()
 				var nodeARR = []
 				var edgeARR = []
 				var table = ''
+
+				var targets = _.keys(_.countBy(json, function (x) {return x.target}))
+				var regulators = _.keys(_.countBy(json, function (x) {return x.regulator}))
+				var both_targ = 0
+				var both_reg = 0
+				$(targets).each(function (index, item) {
+					if ($.inArray(item, regulators) >= 0) {
+						both_targ += 1
+					}
+				})
+				$(regulators).each(function (index, item) {
+					if ($.inArray(item, targets) >= 0) {
+						both_reg += 1
+					}
+				})
+				console.log(json.length)
+				console.log(regulators.length)
+				var data = [
+					{
+						x: ['Number of Regulators', 'Number of Targets'],
+						y: [regulators.length - both_reg, targets.length - both_targ],
+						name: 'Specific',
+						type: 'bar',
+						marker: {
+							color: '#4dac26'
+						}
+					}, 
+					{
+						x: ['Number of Regulators', 'Number of Targets'],
+						y: [both_reg, both_targ],
+						name: 'Both target and regulator',
+						type: 'bar',
+						marker: {
+							color: '#d01c8b'
+						}
+					}]
+				var total_genes = (regulators.length - both_reg) + (targets.length - both_targ)
+				console.log(total_genes)
+				var layout = {barmode: 'stack', title: 'There are ' + json.length + ' interactions in this local network'}
+				Plotly.newPlot('summary', data, layout)
+
 				$(json).each(function (index, item) {
 					var reg_selected = false
 					var tar_selected = false
@@ -106,7 +149,7 @@ $(function () {
 				}) // close each
 				$('#netTable').html(table)
 				var selectedLayout = $('#layout').val()
-				console.log(selectedLayout)
+				//console.log(selectedLayout)
 				if (selectedLayout == 'cose') {
 					$('#cy').cytoscape({
 						layout: {

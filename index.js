@@ -170,7 +170,7 @@ app.get('/querying', function (request, response) {
 	function testQuery () {
 		return new Promise( function (fulfill, reject) {
 			var inquery = request.query.textQuery
-			console.log("and here we query the network in python...", inquery)
+			//console.log("and here we query the network in python...", inquery)
 			var python = child.spawn('python', [__dirname + '/public/python/network_query.py', inquery])
 			var data = ''
 			python.stdout.on('data', function (chunk) {
